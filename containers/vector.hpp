@@ -61,7 +61,7 @@ namespace ft {
 				: first(NULL)
 				, last(NULL)
 				, reserved_last(NULL)
-				, alloc(traits::select_on_container_copy_construction(r.alloc))
+				, alloc((r.alloc))
 			{
 				reserve(r.size());
 				for (pointer dest = first, src = r.begin(), last = r.end(); src != last; ++dest, ++src)
