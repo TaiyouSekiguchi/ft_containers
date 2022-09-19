@@ -28,7 +28,7 @@ namespace ft {
 			// constructor
 			vector() : vector(allocator_type()) {}
 
-			explicit vector(const allocator_type &alloc) noexcept
+			explicit vector(const allocator_type &alloc)
 				: first(NULL), last(NULL), reserved_last(NULL), alloc(alloc) {}
 
 			explicit vector(size_type count, const T& value = T(), const Allocator& alloc = Allocator())
@@ -109,8 +109,8 @@ namespace ft {
 			const_iterator begin() const { return first; }
 			iterator end() { return last; }
 			const_iterator end() const { return last; }
-			const_iterator cbegin() const noexcept { return first; }
-			const_iterator cend() const noexcept { return last; }
+			const_iterator cbegin() const { return first; }
+			const_iterator cend() const { return last; }
 			reverse_iterator rbegin() { return reverse_iterator{last}; }
 			const_reverse_iterator rbegin() const { return reverse_iterator{last}; }
 			reverse_iterator rend() { return reverse_iterator{first}; }
