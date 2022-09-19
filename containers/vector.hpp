@@ -161,7 +161,7 @@ namespace ft {
 
 				for (pointer old_iter = old_first; old_iter != old_last; ++old_iter, ++last)
 				{
-					construct(last, std::move(*old_iter));
+					construct(last, *old_iter);
 				}
 
 				for (reverse_iterator riter = reverse_iterator(old_last), rend = reverse_iterator(old_first); riter != rend; ++riter)
