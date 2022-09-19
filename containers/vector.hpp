@@ -110,8 +110,6 @@ namespace ft {
 			const_iterator begin() const { return first; }
 			iterator end() { return last; }
 			const_iterator end() const { return last; }
-			const_iterator cbegin() const { return first; }
-			const_iterator cend() const { return last; }
 			reverse_iterator rbegin() { return reverse_iterator(last); }
 			const_reverse_iterator rbegin() const { return reverse_iterator(last); }
 			reverse_iterator rend() { return reverse_iterator(first); }
