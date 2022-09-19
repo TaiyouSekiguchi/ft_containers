@@ -65,6 +65,10 @@ namespace ft
 							typename ft::iterator_traits<Iter>::pointer,
 							typename ft::iterator_traits<Iter>::reference>
 	{
+		protected:
+			Iter _current;
+			typedef ft::iterator_traits<Iter> traits_type;
+
 		public:
 			// alias
 			typedef Iter iterator_type;
@@ -140,11 +144,7 @@ namespace ft
 				_current += n;
 				return *this;
 			}
-
-		protected:
-			Iter _current;
-			typedef ft::iterator_traits<Iter> traits_type;
-	}
+	};
 
 	template <class Iterator1, class Iterator2>
 	bool operator==(const ft::reverse_iterator<Iterator1> &lhs,

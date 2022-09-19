@@ -31,7 +31,7 @@ namespace ft {
 			typedef typename ft::reverse_iterator<const iterator>	const_reverse_iterator;
 
 			// constructor
-			vector() :
+			vector()
 				: first(NULL), last(NULL), reserved_last(NULL), alloc(allocator_type()) {}
 
 			explicit vector(const allocator_type &alloc)
@@ -44,10 +44,10 @@ namespace ft {
 			}
 
 			template <typename InputIterator>
-			vector(InputIterator first, InputIterator last, const Allocator& alloc = Allocator(), typename std::enable_if<!std::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
+			vector(InputIterator first, InputIterator last, const Allocator& alloc = Allocator(), typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
 				: first(NULL), last(NULL), reserved_last(NULL), alloc(alloc)
 			{
-				reserve(std::distance(first, last));
+				reserve(ft::distance(first, last));
 				for (pointer i = first; i != last; ++i)
 				{
 					push_back(*i);
@@ -69,7 +69,8 @@ namespace ft {
 				, alloc((r.alloc))
 			{
 				reserve(r.size());
-				for (pointer dest = first, src = r.begin(), last = r.end(); src != last; ++dest, ++src)
+				pointer dest = first;
+				for (const_iterator src = r.begin(), last = r.end(); src != last; ++dest, ++src)
 				{
 					construct(dest, *src);
 				}
@@ -89,6 +90,7 @@ namespace ft {
 					if (capacity() >= r.size())
 					{
 						std::copy(r.begin(), r.begin() + r.size(), begin());
+						last = first + r.size();
 						for (const_iterator src_iter = r.begin() + r.size(), src_end = r.end(); src_iter != src_end; ++src_iter, ++last)
 						{
 							construct(last, *src_iter);
@@ -98,9 +100,9 @@ namespace ft {
 					{
 						destroy_until(rbegin());
 						reserve(r.size());
-						for (const_iterator src_iter = r.begin(), src_end = r.end(), dest_iter = begin();  src_iter != src_end; ++src_iter, ++dest_iter, ++last)
+						for (const_iterator src_iter = r.begin(), src_end = r.end(); src_iter != src_end; ++src_iter, ++last)
 						{
-							construct(dest_iter, *src_iter);
+							construct(last, *src_iter);
 						}
 					}
 				return *this;
@@ -121,7 +123,7 @@ namespace ft {
 			const_reverse_iterator rend() const { return reverse_iterator(first); }
 
 			// function
-			size_type size() const { return std::distance(begin(), end()); }
+			size_type size() const { return end() - begin(); }
 			bool empty() const { return begin() == end(); }
 			size_type capacity() const { return reserved_last - first; }
 			reference at(size_type i)
