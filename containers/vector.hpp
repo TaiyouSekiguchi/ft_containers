@@ -26,13 +26,14 @@ namespace ft {
 			typedef std::reverse_iterator<const_iterator>	const_reverse_iterator;
 
 			// constructor
-			vector() : vector(allocator_type()) {}
+			vector() :
+				: first(NULL), last(NULL), reserved_last(NULL), alloc(allocator_type()) {}
 
 			explicit vector(const allocator_type &alloc)
 				: first(NULL), last(NULL), reserved_last(NULL), alloc(alloc) {}
 
 			explicit vector(size_type count, const T& value = T(), const Allocator& alloc = Allocator())
-				: vector(alloc)
+				: first(NULL), last(NULL), reserved_last(NULL), alloc(alloc)
 			{
 				resize(count, value);
 			}
@@ -42,7 +43,7 @@ namespace ft {
 				: first(NULL), last(NULL), reserved_last(NULL), alloc(alloc)
 			{
 				reserve(std::distance(first, last));
-				for (InputIterator i = first; i != last; ++i)
+				for (pointer i = first; i != last; ++i)
 				{
 					push_back(*i);
 				}
@@ -227,35 +228,16 @@ namespace ft {
 			}
 
 		private:
-			// alias
-			typedef std::allocator_traits<allocator_type>	traits;
 
 			// function
-			pointer allocate(size_type n)
-			{
-				return traits::allocate(alloc, n);
-			}
-			void deallocate()
-			{
-				traits::deallocate(alloc, first, capacity());
-			}
-			void construct(pointer ptr)
-			{
-				traits::construct(alloc, ptr);
-			}
+			pointer allocate(size_type n) { return alloc.allocate(n); }
+			void deallocate() { alloc.deallocate(first, capacity()); }
+			void construct(pointer ptr) { alloc.construct(ptr, 0); }
 			void construct(pointer ptr, const_reference value)
 			{
-				traits::construct(alloc, ptr, value);
+				alloc.construct(ptr, value);
 			}
-			// ムーブ用
-			void construct(pointer ptr, value_type &&value)
-			{
-				traits::construct(alloc, ptr, std::move(value));
-			}
-			void destroy(pointer ptr)
-			{
-				traits::destroy(alloc, ptr);
-			}
+			void destroy(pointer ptr) { alloc.destroy(ptr); }
 			void destroy_until(reverse_iterator rend)
 			{
 				for (reverse_iterator riter = rbegin(); riter != rend; ++riter, --last)
