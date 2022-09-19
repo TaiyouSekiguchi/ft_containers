@@ -2,8 +2,13 @@
 # define FT_VECTOR_HPP
 
 # include <iostream>
-# include <iterator>
 # include <limits>
+
+# include "../utils/algorithm.hpp"
+# include "../utils/iterator.hpp"
+# include "../utils/random_access_iterator.hpp"
+# include "../utils/util.hpp"
+
 
 namespace ft {
 
@@ -20,10 +25,10 @@ namespace ft {
 			typedef Allocator								allocator_type;
 			typedef std::size_t								size_type;
 			typedef std::ptrdiff_t 							difference_type;
-			typedef pointer									iterator;
-			typedef const_pointer							const_iterator;
-			typedef std::reverse_iterator<iterator>			reverse_iterator;
-			typedef std::reverse_iterator<const_iterator>	const_reverse_iterator;
+			typedef typename ft::random_access_iterator<value_type>	iterator;
+			typedef typename ft::random_access_iterator<const value_type>	const_iterator;
+			typedef typename ft::reverse_iterator<iterator>	reverse_iterator;
+			typedef typename ft::reverse_iterator<const iterator>	const_reverse_iterator;
 
 			// constructor
 			vector() :
