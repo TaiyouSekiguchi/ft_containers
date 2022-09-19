@@ -4,5 +4,5 @@ void tutorial_test();
 
 int main()
 {
-	tutorial_test();
+	vector_test();
 }
