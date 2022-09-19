@@ -111,10 +111,10 @@ namespace ft {
 			const_iterator end() const { return last; }
 			const_iterator cbegin() const { return first; }
 			const_iterator cend() const { return last; }
-			reverse_iterator rbegin() { return reverse_iterator{last}; }
-			const_reverse_iterator rbegin() const { return reverse_iterator{last}; }
-			reverse_iterator rend() { return reverse_iterator{first}; }
-			const_reverse_iterator rend() const { return reverse_iterator{first}; }
+			reverse_iterator rbegin() { return reverse_iterator(last); }
+			const_reverse_iterator rbegin() const { return reverse_iterator(last); }
+			reverse_iterator rend() { return reverse_iterator(first); }
+			const_reverse_iterator rend() const { return reverse_iterator(first); }
 
 			// function
 			size_type size() const { return std::distance(begin(), end()); }
