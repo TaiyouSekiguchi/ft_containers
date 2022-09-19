@@ -46,7 +46,7 @@ struct array_iterator
 
 		array_iterator operator+(std::size_t n) const
 		{
-			auto copy = *this;
+			array_iterator copy = *this;
 			copy += n;
 			return copy;
 		}
@@ -62,11 +62,11 @@ struct array
 {
 	public:
 		// alias
-		using value_type      = T;
-		using reference       = T &;
-		using const_reference = const T &;
-		using size_type       = std::size_t;
-		using iterator        = array_iterator<array>;
+		typedef value_type      = T;
+		typedef reference       = T &;
+		typedef const_reference = const T &;
+		typedef size_type       = std::size_t;
+		typedef iterator        = array_iterator<array>;
 
 		// operator
 		reference operator[](size_type i)

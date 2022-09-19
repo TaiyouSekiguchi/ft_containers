@@ -12,18 +12,18 @@ namespace ft {
 	{
 		public:
 			// alias
-			using value_type             = T;
-			using pointer                = T *;
-			using const_pointer          = const pointer;
-			using reference              = value_type &;
-			using const_reference        = const value_type &;
-			using allocator_type         = Allocator;
-			using size_type              = std::size_t;
-			using difference_type        = std::ptrdiff_t;
-			using iterator               = pointer;
-			using const_iterator         = const_pointer;
-			using reverse_iterator       = std::reverse_iterator<iterator>;
-			using const_reverse_iterator = std::reverse_iterator<const_iterator>;
+			typedef T										value_type;
+			typedef T*										pointer;
+			typedef const pointer							const_pointer;
+			typedef value_type&								reference;
+			typedef const value_type&						const_reference;
+			typedef Allocator								allocator_type;
+			typedef std::size_t								size_type;
+			typedef std::ptrdiff_t 							difference_type;
+			typedef pointer									iterator;
+			typedef const_pointer							const_iterator;
+			typedef std::reverse_iterator<iterator>			reverse_iterator;
+			typedef std::reverse_iterator<const_iterator>	const_reverse_iterator;
 
 			// constructor
 			vector() : vector(allocator_type()) {}
@@ -42,7 +42,7 @@ namespace ft {
 				: first(NULL), last(NULL), reserved_last(NULL), alloc(alloc)
 			{
 				reserve(std::distance(first, last));
-				for (auto i = first; i != last; ++i)
+				for (InputIterator i = first; i != last; ++i)
 				{
 					push_back(*i);
 				}
@@ -63,7 +63,7 @@ namespace ft {
 				, alloc(traits::select_on_container_copy_construction(r.alloc))
 			{
 				reserve(r.size());
-				for (auto dest = first, src = r.begin(), last = r.end(); src != last; ++dest, ++src)
+				for (pointer dest = first, src = r.begin(), last = r.end(); src != last; ++dest, ++src)
 				{
 					construct(dest, *src);
 				}
@@ -83,7 +83,7 @@ namespace ft {
 					if (capacity() >= r.size())
 					{
 						std::copy(r.begin(), r.begin() + r.size(), begin());
-						for (auto src_iter = r.begin() + r.size(), src_end = r.end(); src_iter != src_end; ++src_iter, ++last)
+						for (const_iterator src_iter = r.begin() + r.size(), src_end = r.end(); src_iter != src_end; ++src_iter, ++last)
 						{
 							construct(last, *src_iter);
 						}
@@ -92,7 +92,7 @@ namespace ft {
 					{
 						destroy_until(rbegin());
 						reserve(r.size());
-						for (auto src_iter = r.begin(), src_end = r.end(), dest_iter = begin();  src_iter != src_end; ++src_iter, ++dest_iter, ++last)
+						for (const_iterator src_iter = r.begin(), src_end = r.end(), dest_iter = begin();  src_iter != src_end; ++src_iter, ++dest_iter, ++last)
 						{
 							construct(dest_iter, *src_iter);
 						}
@@ -146,11 +146,11 @@ namespace ft {
 				if (sz <= capacity())
 					return;
 
-				auto ptr = allocate(sz);
+				pointer ptr = allocate(sz);
 
-				auto old_first = first;
-				auto old_last = last;
-				auto old_capacity = capacity();
+				pointer old_first = first;
+				pointer old_last = last;
+				size_type old_capacity = capacity();
 
 				first = ptr;
 				last = first;
@@ -158,12 +158,12 @@ namespace ft {
 
 				//std::scope_exit e([&] { traits::deallocate(alloc, old_first, old_capacity); });
 
-				for (auto old_iter = old_first; old_iter != old_last; ++old_iter, ++last)
+				for (pointer old_iter = old_first; old_iter != old_last; ++old_iter, ++last)
 				{
 					construct(last, std::move(*old_iter));
 				}
 
-				for (auto riter = reverse_iterator(old_last), rend = reverse_iterator(old_first);riter != rend; ++riter)
+				for (reverse_iterator riter = reverse_iterator(old_last), rend = reverse_iterator(old_first); riter != rend; ++riter)
 				{
 					destroy(&*riter);
 				}
@@ -173,7 +173,7 @@ namespace ft {
 			{
 				if (sz < size())
 				{
-					auto diff = size() - sz;
+					size_type diff = size() - sz;
 					destroy_until(rbegin() + diff);
 					last = first + sz;
 				}
@@ -191,7 +191,7 @@ namespace ft {
 				// 現在の要素数より少ない
 				if (sz < size())
 				{
-					auto diff = size() - sz;
+					size_type diff = size() - sz;
 					destroy_until(rbegin() + diff);
 					last = first + sz;
 				}
@@ -212,7 +212,7 @@ namespace ft {
 				if (size() + 1 > capacity())
 				{
 					// 現在のストレージサイズ
-					auto c = size();
+					size_type c = size();
 					// 0の場合は1に
 					if (c == 0)
 						c = 1;
@@ -228,7 +228,7 @@ namespace ft {
 
 		private:
 			// alias
-			using traits = std::allocator_traits<allocator_type>;
+			typedef std::allocator_traits<allocator_type>	traits;
 
 			// function
 			pointer allocate(size_type n)
@@ -258,7 +258,7 @@ namespace ft {
 			}
 			void destroy_until(reverse_iterator rend)
 			{
-				for (auto riter = rbegin(); riter != rend; ++riter, --last)
+				for (reverse_iterator riter = rbegin(); riter != rend; ++riter, --last)
 				{
 					destroy(&*riter);
 				}

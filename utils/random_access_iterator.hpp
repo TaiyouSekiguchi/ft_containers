@@ -17,8 +17,8 @@ namespace ft
 			typedef
 				typename ft::iterator<ft::random_access_iterator_tag, T>::difference_type
 					difference_type;
-			typedef T *pointer;
-			typedef T &reference;
+			typedef T*	pointer;
+			typedef T&	reference;
 
 			// member function
 			random_access_iterator() : _current(NULL) {}
