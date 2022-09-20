@@ -126,6 +126,13 @@ namespace ft {
 			size_type size() const { return end() - begin(); }
 			bool empty() const { return begin() == end(); }
 			size_type capacity() const { return reserved_last - first; }
+			size_type max_size() const
+			{
+				size_t div = sizeof(value_type);
+				if (div == 1)
+					++div;
+				return std::numeric_limits<size_type>::max() / div;
+			}
 			reference at(size_type i)
 			{
 				if (i >= size())
@@ -232,6 +239,216 @@ namespace ft {
 				++last;
 			}
 
+			void assign(size_type count, const T &value)
+			{
+				if (count > capacity())
+				{
+					clear();
+					deallocate();
+
+					first = allocate(count);
+					last = first;
+					reserved_last = first + count;
+					for (size_type i = 0; i < count; ++i)
+						construct(last++, value);
+				}
+				else if (count > size())
+				{
+					pointer ptr = first;
+					for (size_type i = 0; i < count; ++i)
+					{
+						if (i < size())
+							*(ptr++) = value;
+						else
+							construct(last++, value);
+					}
+				}
+				else
+				{
+					clear();
+					for (size_type i = 0; i < count; ++i)
+						construct(last++, value);
+				}
+			}
+
+			template <class InputIt>
+			void assign(InputIt src_first, InputIt src_last,
+						typename ft::enable_if<!ft::is_integral<InputIt>::value,
+											   InputIt>::type * = NULL)
+			{
+				size_type count = src_last - src_first;
+				if (count > capacity())
+				{
+					clear();
+					deallocate();
+
+					first = allocate(count);
+					last = first;
+					reserved_last = first + count;
+					for (InputIt head = src_first; head != src_last; ++head)
+						construct(last++, *head);
+				}
+				else if (count > size())
+				{
+					pointer ptr = first;
+					for (size_type i = 0; i < count; ++i)
+					{
+						if (i < size())
+							*(ptr++) = *src_first++;
+						else
+							construct(last++, *src_first++);
+					}
+				}
+				else
+				{
+					clear();
+					for (InputIt head = src_first; head != src_last; ++head)
+						construct(last++, *head);
+				}
+			}
+			iterator insert(iterator pos, const T &value)
+			{
+				size_type count = 1;
+				difference_type offset = pos - begin();
+
+				size_type c = capacity();
+				size_type pre_c = c;
+				size_type new_size = size() + count;
+				while (new_size > c)
+				{
+					if (c == 0)
+						c = 1;
+					else
+						c = c << 1;
+					if ((c >> 1) != pre_c)
+						throw std::overflow_error("vector::insert");
+					pre_c = c;
+				}
+				reserve(c);
+				for (; last != first + new_size; ++last)
+					construct(last);
+
+				iterator tail = last - 1;
+				iterator range_end = begin() + offset + count - 1;
+				// pos + count - 1 までmemmove
+				for (; tail > range_end; --tail)
+					*tail = *(tail - count);
+				iterator range_begin = begin() + offset - 1;
+				for (; tail > range_begin; --tail)
+					*tail = value;
+
+				return begin() + offset;
+			}
+
+			void insert(iterator pos, size_type count, const T &value)
+			{
+				if (count < 0)
+					throw std::length_error("negative length.");
+				if (count == 0)
+					return;
+
+				difference_type offset = pos - begin();
+				size_type c = capacity();
+				size_type pre_c = c;
+				size_type new_size = size() + count;
+				while (c < new_size)
+				{
+					if (c == 0)
+						c = 1;
+					else
+						c = c << 1;
+					if ((c >> 1) != pre_c)
+						throw std::overflow_error("vector::insert");
+					pre_c = c;
+				}
+				reserve(c);
+				for (; last != first + new_size; ++last)
+					construct(last);
+
+				iterator tail = last - 1;
+				iterator range_end = begin() + offset + count - 1;
+				// pos + count - 1 までmemmove
+				for (; tail > range_end; --tail)
+					*tail = *(tail - count);
+				iterator range_begin = begin() + offset - 1;
+				for (; tail > range_begin; --tail)
+					*tail = value;
+			}
+
+			template <class InputIt>
+			void insert(iterator pos, InputIt src_first, InputIt src_last,
+						typename ft::enable_if<!ft::is_integral<InputIt>::value,
+											   InputIt>::type * = NULL)
+			{
+				difference_type count = src_last - src_first;
+				if (count < 0)
+					throw std::length_error("negative length.");
+				if (count == 0)
+					return;
+
+				difference_type offset = pos - begin();
+				size_type c = capacity();
+				size_type pre_c = c;
+				size_type new_size = size() + count;
+				while (c < new_size)
+				{
+					if (c == 0)
+						c = 1;
+					else
+						c = c << 1;
+					if ((c >> 1) != pre_c)
+						throw std::overflow_error("vector::insert");
+					pre_c = c;
+				}
+				reserve(c);
+				for (; last != first + new_size; ++last)
+					construct(last);
+
+				iterator tail = last - 1;
+				iterator range_end = begin() + offset + count - 1;
+				// pos + count - 1 までmemmove
+				for (; tail > range_end; --tail)
+					*tail = *(tail - count);
+				iterator range_begin = begin() + offset - 1;
+				--src_last;
+				for (; src_last > src_first - 1; --src_last)
+					*tail-- = *src_last;
+			}
+
+			iterator erase(iterator pos)
+			{
+				// The iterator first does not need to be dereferenceable if first==last:
+				// erasing an empty range is a no-op.
+				if (first == last)
+					return NULL;
+
+				difference_type offset = pos - begin();
+
+				for (iterator src = pos + 1; src < end(); ++src)
+				{
+					*(src - 1) = *src;
+				}
+				destroy(--last);
+				return (begin() + offset);
+			}
+			void swap(vector &other)
+			{
+				pointer save_first = other.first;
+				pointer save_last = other.last;
+				pointer save_reserved_last = other.reserved_last;
+				allocator_type save_alloc = other.alloc;
+
+				other.first = this->first;
+				other.last = this->last;
+				other.reserved_last = this->reserved_last;
+				other.alloc = this->alloc;
+
+				this->first = save_first;
+				this->last = save_last;
+				this->reserved_last = save_reserved_last;
+				this->alloc = save_alloc;
+			}
+
 		private:
 
 			// function
@@ -259,5 +476,14 @@ namespace ft {
 	}; // class vector
 
 } // namespace ft
+
+namespace std
+{
+	template <class T, class Alloc>
+	void swap(ft::vector<T, Alloc> &lhs, ft::vector<T, Alloc> &rhs)
+	{
+		lhs.swap(rhs);
+	}
+} // namespace std
 
 #endif
