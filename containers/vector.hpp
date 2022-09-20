@@ -468,11 +468,13 @@ namespace ft {
 				}
 			}
 
+			protected:
 			// data member
 			pointer first;
 			pointer last;
 			pointer reserved_last;
 			allocator_type alloc;
+
 	}; // class vector
 
 } // namespace ft
