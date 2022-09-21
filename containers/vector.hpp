@@ -18,13 +18,13 @@ namespace ft {
 		public:
 			// Member types
 			typedef T														value_type;
-			typedef T*														pointer;
-			typedef const pointer											const_pointer;
-			typedef value_type&												reference;
-			typedef const value_type&										const_reference;
 			typedef Allocator												allocator_type;
 			typedef std::size_t												size_type;
 			typedef std::ptrdiff_t 											difference_type;
+			typedef value_type&												reference;
+			typedef const value_type&										const_reference;
+			typedef Allocator::pointer										pointer;
+			typedef Allocator::const_pointer								const_pointer;
 			typedef typename ft::random_access_iterator<value_type>			iterator;
 			typedef typename ft::random_access_iterator<const value_type>	const_iterator;
 			typedef typename ft::reverse_iterator<iterator>					reverse_iterator;
