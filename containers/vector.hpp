@@ -2,7 +2,9 @@
 # define FT_VECTOR_HPP
 
 # include <iostream>
+
 # include <limits>
+# include <memory>
 
 # include "../utils/algorithm.hpp"
 # include "../utils/iterator.hpp"
@@ -30,7 +32,7 @@ namespace ft {
 			typedef typename ft::reverse_iterator<iterator>					reverse_iterator;
 			typedef typename ft::reverse_iterator<const iterator>			const_reverse_iterator;
 
-			// Member funcitons
+			// Member functions
 			// constructor
 			vector()
 				: first_(NULL)
@@ -39,7 +41,10 @@ namespace ft {
 				, alloc_(allocator_type()) {}
 
 			explicit vector(const allocator_type &alloc)
-				: first(NULL), last(NULL), reserved_last(NULL), alloc(alloc) {}
+				: first_(NULL)
+				, last_(NULL)
+				, reserved_last_(NULL)
+				, alloc_(alloc) {}
 
 			explicit vector(size_type count, const T& value = T(), const Allocator& alloc = Allocator())
 				: first(NULL), last(NULL), reserved_last(NULL), alloc(alloc)
