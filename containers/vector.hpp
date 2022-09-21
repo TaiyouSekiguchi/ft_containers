@@ -16,7 +16,7 @@ namespace ft {
 	class vector
 	{
 		public:
-			// alias
+			// Member types
 			typedef T														value_type;
 			typedef T*														pointer;
 			typedef const pointer											const_pointer;
@@ -30,9 +30,13 @@ namespace ft {
 			typedef typename ft::reverse_iterator<iterator>					reverse_iterator;
 			typedef typename ft::reverse_iterator<const iterator>			const_reverse_iterator;
 
+			// Member funcitons
 			// constructor
 			vector()
-				: first(NULL), last(NULL), reserved_last(NULL), alloc(allocator_type()) {}
+				: first_(NULL)
+				, last_(NULL)
+				, reserved_last_(NULL)
+				, alloc_(allocator_type()) {}
 
 			explicit vector(const allocator_type &alloc)
 				: first(NULL), last(NULL), reserved_last(NULL), alloc(alloc) {}
@@ -470,10 +474,10 @@ namespace ft {
 
 			protected:
 			// data member
-			pointer first;
-			pointer last;
-			pointer reserved_last;
-			allocator_type alloc;
+			pointer first_;
+			pointer last_;
+			pointer reserved_last_;
+			allocator_type alloc_;
 
 	}; // class vector
 
