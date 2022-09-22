@@ -24,30 +24,30 @@ namespace ft
 	};
 
 	template <class T>
-	struct iterator_traits<T *>
+	struct iterator_traits<T*>
 	{
 		typedef ptrdiff_t difference_type;
 		typedef T value_type;
-		typedef T *pointer;
-		typedef T &reference;
+		typedef T* pointer;
+		typedef T& reference;
 		typedef ft::random_access_iterator_tag iterator_category;
 	};
 
 	template <class T>
-	struct iterator_traits<const T *>
+	struct iterator_traits<const T*>
 	{
 		typedef ptrdiff_t difference_type;
 		typedef T value_type;
-		typedef const T *pointer;
-		typedef const T &reference;
+		typedef const T* pointer;
+		typedef const T& reference;
 		typedef ft::random_access_iterator_tag iterator_category;
 	};
 
 	template <class Category,
 				class T,
 				class Distance = std::ptrdiff_t,
-				class Pointer = T *,
-				class Reference = T &>
+				class Pointer = T*,
+				class Reference = T&>
 	struct iterator
 	{
 		typedef Category iterator_category;
@@ -89,7 +89,7 @@ namespace ft
 
 			// copy operator
 			template <class U>
-			reverse_iterator &operator=(const ft::reverse_iterator<U> &other)
+			reverse_iterator& operator=(const ft::reverse_iterator<U>& other)
 			{
 				_current = other.base();
 				return *this;
@@ -144,7 +144,7 @@ namespace ft
 				_current += n;
 				return *this;
 			}
-	};
+	}; // class reverse_iterator
 
 	template <class Iterator1, class Iterator2>
 	bool operator==(const ft::reverse_iterator<Iterator1> &lhs,
