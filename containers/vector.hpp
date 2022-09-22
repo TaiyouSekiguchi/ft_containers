@@ -250,6 +250,11 @@ namespace ft {
 				++last_;
 			}
 
+			void pop_back(void)
+			{
+				destroy(--last_);
+			}
+
 			void assign(size_type count, const T &value)
 			{
 				if (count > capacity())
@@ -428,8 +433,6 @@ namespace ft {
 
 			iterator erase(iterator pos)
 			{
-				// The iterator first does not need to be dereferenceable if first==last:
-				// erasing an empty range is a no-op.
 				if (first_ == last_)
 					return NULL;
 
@@ -442,6 +445,24 @@ namespace ft {
 				destroy(--last_);
 				return (begin() + offset);
 			}
+
+			iterator erase(iterator first, iterator last)
+			{
+				if (first_ == last_)
+					return NULL;
+
+				difference_type return_diff = first - begin();
+				difference_type destroy_diff = last - first;
+
+				for (iterator dst = first, src = last; src < end(); ++dst, ++src)
+				{
+					*dst = *src;
+				}
+				destroy_until(rbegin() + destroy_diff);
+
+				return (begin() + return_diff);
+			}
+
 			void swap(vector &other)
 			{
 				pointer save_first = other.first_;
@@ -460,12 +481,18 @@ namespace ft {
 				this->alloc_ = save_alloc;
 			}
 
+			allocator_type get_allocator() const
+			{
+				return (alloc_);
+			}
+
 		private:
 
 			// function
 			pointer allocate(size_type n) { return alloc_.allocate(n); }
 			void deallocate() { alloc_.deallocate(first_, capacity()); }
-			void construct(pointer ptr) { alloc_.construct(ptr, 0); }
+			void construct(pointer ptr) { alloc_.construct(ptr); }
+			//void construct(pointer ptr) { alloc_.construct(ptr, 0); }
 			void construct(pointer ptr, const_reference value) { alloc_.construct(ptr, value); }
 			void destroy(pointer ptr) { alloc_.destroy(ptr); }
 			void destroy_until(reverse_iterator rend)
@@ -485,14 +512,46 @@ namespace ft {
 
 	}; // class vector
 
+	// Nom-member function
+	template <typename T, typename Allocator>
+	bool operator==(const ft::vector<T, Allocator>& x, const ft::vector<T, Allocator>& y)
+	{
+		return x.size() == y.size() && ft::equal(x.begin(), x.end(), y.begin());
+	}
+	template <typename T, typename Allocator>
+	bool operator!=(const ft::vector<T, Allocator>& x, const ft::vector<T, Allocator>& y)
+	{
+		return !(x == y);
+	}
+	template <typename T, typename Allocator>
+	bool operator<(const ft::vector<T, Allocator>& x, const ft::vector<T, Allocator>& y)
+	{
+		return ft::lexicographical_compare(x.begin(), x.end(), y.begin(), y.end());
+	}
+	template <typename T, typename Allocator>
+	bool operator>(const ft::vector<T, Allocator>& x, const ft::vector<T, Allocator>& y)
+	{
+		return y < x;
+	}
+	template <typename T, typename Allocator>
+	bool operator>=(const ft::vector<T, Allocator>& x, const ft::vector<T, Allocator>& y)
+	{
+		return !(x < y);
+	}
+	template <typename T, typename Allocator>
+	bool operator<=(const ft::vector<T, Allocator>& x, const ft::vector<T, Allocator>& y)
+	{
+		return !(y < x);
+	}
+
 } // namespace ft
 
 namespace std
 {
 	template <class T, class Alloc>
-	void swap(ft::vector<T, Alloc> &lhs, ft::vector<T, Alloc> &rhs)
+	void swap(ft::vector<T, Alloc> &x, ft::vector<T, Alloc> &y)
 	{
-		lhs.swap(rhs);
+		x.swap(y);
 	}
 } // namespace std
 
