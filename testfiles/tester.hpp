@@ -9,13 +9,13 @@
 #include <vector>
 namespace ft = std;
 #else
-#include "../containers/map.hpp"
-#include "../containers/set.hpp"
-#include "../containers/stack.hpp"
+//#include "../containers/map.hpp"
+//#include "../containers/set.hpp"
+//#include "../containers/stack.hpp"
 #include "../containers/vector.hpp"
 #include "../utils/algorithm.hpp"
 #include "../utils/iterator.hpp"
-#include "../utils/pair.hpp"
+//#include "../utils/pair.hpp"
 #include "../utils/util.hpp"
 #endif
 
