@@ -58,12 +58,12 @@ int test2(void)
 
 int test3(void)
 {
-	PRE::map<std::string, int> map1;
-	map1["something"] = 69;
-	map1["anything"] = 199;
-	map1["that thing"] = 50;
+	PRE::map<std::string, int> m;
+	m["something"] = 69;
+	m["anything"] = 199;
+	m["that thing"] = 50;
 
-	PRE::map<std::string, int> copy(map1);
+	PRE::map<std::string, int> copy(m);
 	if (copy["something"] != 69
 		|| copy["anything"] != 199
 		|| copy["that thing"] != 50)
@@ -74,15 +74,15 @@ int test3(void)
 
 int test4(void)
 {
-	PRE::map<std::string, int> map1;
-	map1["something"] = 69;
-	map1["anything"] = 199;
-	map1["that thing"] = 50;
+	PRE::map<std::string, int> m;
+	m["something"] = 69;
+	m["anything"] = 199;
+	m["that thing"] = 50;
 
 	PRE::map<std::string, int> copy;
 
-	copy = map1;
-	if (map1 == copy)
+	copy = m;
+	if (m == copy)
 		return (SUCCESS);
 	else
 		return (FAILURE);
@@ -159,11 +159,10 @@ int	test8(void)
 	it_end = m.end();
 
 	int n = 0;
-	for (; it != it_end; ++it)
+	for (; it != it_end; ++it, ++n)
 	{
 		if (it->second != n)
 			return (FAILURE);
-		++n;
 	}
 
 	return (SUCCESS);
@@ -232,7 +231,10 @@ int test11(void)
 /*
 int test12(void)
 {
-	// max_size
+	PRE::map<char, char> m;
+	std::cout << "max_size : " << m.max_size() << std::endl;
+
+	return SUCCESS;
 }
 */
 
@@ -283,7 +285,6 @@ int test14(void)
 	return SUCCESS;
 }
 
-/*
 int test15(void)
 {
 	PRE::map<int, char> m;
@@ -312,7 +313,6 @@ int test15(void)
 		return FAILURE;
 	return SUCCESS;
 }
-*/
 
 int test16(void)
 {
@@ -588,8 +588,8 @@ int main()
 	result.push_back(FAILURE);
 	result.push_back(test13());
 	result.push_back(test14());
-	//result.push_back(test15());
-	result.push_back(FAILURE);
+	result.push_back(test15());
+	//result.push_back(FAILURE);
 	result.push_back(test16());
 	result.push_back(test17());
 	result.push_back(test18());
