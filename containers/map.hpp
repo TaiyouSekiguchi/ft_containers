@@ -1,7 +1,10 @@
 #ifndef MAP_HPP
 #define MAP_HPP
 
+#include <limits>
+
 #include <iterator>
+
 #include "../utils/algorithm.hpp"
 
 namespace ft
@@ -355,10 +358,7 @@ class map
 			insert(other.begin(), other.end());
 		}
 
-		~map()
-		{
-			free_mem(root_);
-		}
+		~map() { free_mem(root_); }
 
 		map& operator=(const map& other)
 		{
@@ -372,7 +372,7 @@ class map
 		allocator_type get_allocator() const { return allocator_type(); }
 
 		// Element access
-		mapped_type at(const key_type& k)
+		mapped_type& at(const key_type& k)
 		{
 			iterator res = find(k);
 			if (res ==end())
@@ -391,17 +391,20 @@ class map
 		// Iterators
 		iterator begin() { return iterator(min_node_); }
 		const_iterator begin() const { return const_iterator(min_node_); }
+
 		iterator end() { return iterator(right_barrier_); }
 		const_iterator end() const { return const_iterator(right_barrier_); }
+
 		reverse_iterator rbegin() { return reverse_iterator(iterator(max_node_)); }
 		const_reverse_iterator rbegin() const { return const_reverse_iterator(iterator(max_node_)); }
+
 		reverse_iterator rend() { return reverse_iterator(left_barrier_); }
 		const_reverse_iterator rend() const { return const_reverse_iterator(left_barrier_); }
 
 		// Capacity
 		bool empty() const { return (node_count_ == 0); }
 		size_type size() const { return node_count_; }
-		size_type max_size() const { return get_allocator().size(); }
+		size_type max_size() const { return get_allocator().max_size(); }
 
 		// Modifiers
 		void clear()
@@ -439,8 +442,19 @@ class map
 			add_barrier();
 			return _Res(_res.second, false);
 		}
+
+
+
+
+
+
+
+
 		void erase(iterator i)
 		{
+
+			std::cout << "erase( iterator ) called." << std::endl;
+
 			node *a = i.node_;
 			iterator j = i;
 			if (a->left != 0)
@@ -487,14 +501,28 @@ class map
 				rebalance(parent);
 			}
 		}
+
+
+
+
+
+
+
+
 		template <class InputIterator>
 		void erase(InputIterator first, InputIterator last)
 		{
+
+			std::cout << "erase( first, last ) called." << std::endl;
+
 			for (; first != last; ++first)
 				erase(first);
 		}
 		size_type erase(const key_type &k)
 		{
+
+			std::cout << "erase( key_type ) called." << std::endl;
+
 			iterator temp = find(k);
 			if (temp == end())
 				return 0;
