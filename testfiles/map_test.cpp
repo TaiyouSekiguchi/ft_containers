@@ -106,6 +106,7 @@ int test5(void)
 	return ret;
 }
 
+/*
 int test6(void)
 {
 	PRE::map<int, char> m;
@@ -131,6 +132,7 @@ int test6(void)
 	}
 	return (SUCCESS);
 }
+*/
 
 int test7(void)
 {
@@ -577,7 +579,8 @@ int main()
 	result.push_back(test3());
 	result.push_back(test4());
 	result.push_back(test5());
-	result.push_back(test6());
+	//result.push_back(test6());
+	result.push_back(FAILURE);
 	result.push_back(test7());
 	result.push_back(test8());
 	//result.push_back(test9());
