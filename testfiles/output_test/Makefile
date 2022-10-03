@@ -21,29 +21,29 @@ $(OBJS_DIR)/%.o	:	%.cpp
 					@[ -d $(OBJS_DIR) ]
 					$(CXX) $(CXXFLAGS) -c $< -o $@
 
-test:
-	$(CXX) $(CXXFLAGS) $(SRCS) -D FT=1 -o $(NAME)
-	@./$(NAME) > output/ft_output 2>output/ft_err
-	$(CXX) $(CXXFLAGS) $(SRCS) -o $(NAME)
-	@./$(NAME) > output/std_output 2>output/std_err
+test			:
+					$(CXX) $(CXXFLAGS) $(SRCS) -D FT=1 -o $(NAME)
+					@./$(NAME) > output/ft_output 2>output/ft_err
+					$(CXX) $(CXXFLAGS) $(SRCS) -o $(NAME)
+					@./$(NAME) > output/std_output 2>output/std_err
  # ret(1) cause make error.  ||: force ret(0)
-	diff output/ft_output output/std_output ||:
-	@echo "---ft_err---"
-	@cat output/ft_err
-	@echo "---std_err---"
-	@cat output/std_err
+					diff output/ft_output output/std_output ||:
+					@echo "---ft_err---"
+					@cat output/ft_err
+					@echo "---std_err---"
+					@cat output/std_err
 
-test0:
-	$(CXX) $(CXXFLAGS)) $(SRCS) -DTEST=1 -o $(NAME)
-	@./$(NAME) > output/ft_output 2>ft_err
-	@cat ft_output
-	@cat ft_err
+test0			:
+					$(CXX) $(CXXFLAGS)) $(SRCS) -DTEST=1 -o $(NAME)
+					@./$(NAME) > output/ft_output 2>ft_err
+					@cat ft_output
+					@cat ft_err
 
-test1:
-	$(CXX) $(CXXFLAGS)) $(SRCS) -o $(NAME)
-	@./$(NAME) > std_out 2>std_err
-	@cat std_out
-	@cat std_err
+test1			:
+					$(CXX) $(CXXFLAGS)) $(SRCS) -o $(NAME)
+					@./$(NAME) > std_out 2>std_err
+					@cat std_out
+					@cat std_err
 
 clean			:
 					$(RM) $(OBJS)
@@ -51,5 +51,6 @@ clean			:
 
 fclean			:
 					$(RM) $(OBJS) $(NAME)
+					$(RM) output/ft_output output/std_output output/ft_err output/std_err
 
 re				:	fclean all
