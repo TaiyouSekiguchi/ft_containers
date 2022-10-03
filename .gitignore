@@ -3,3 +3,9 @@ a.out
 a.out.dSYM
 tags.
 .tags
+*.a
+*.o
+ft_output
+std_output
+ft_err
+std_err
