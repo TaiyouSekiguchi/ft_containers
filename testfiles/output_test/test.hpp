@@ -33,6 +33,10 @@
 #include <string>
 #include <typeinfo> // typeid
 
+#define cout std::cout
+#define endl std::endl
+#define cerr std::cerr
+
 // vector_test.cpp
 void vector_test();
 
