@@ -57,7 +57,7 @@ class avl_tree
 		~avl_tree()
 		{
 			delete_tree();
-			delete_node();
+			delete_node(end_);
 		}
 
 		avl_tree& operator=(const avl_tree& o)
@@ -176,7 +176,7 @@ class avl_tree
 					alt_node->left_->connect_parent(alt_node->parent_, alt_node->is_left());
 				else
 					alt_node->right_->connect_parent(alt_node->parent_, alt_node->is_left());
-				alt_node_connect_parent(erase_node->parent_, erase_node->is_left());
+				alt_node->connect_parent(erase_node->parent_, erase_node->is_left());
 				alt_node->connect_left(erase_node->left_);
 				alt_node->connect_right(erase_node->right_);
 			}
@@ -253,12 +253,12 @@ class avl_tree
 		iterator	find(const key_type& k)
 		{
 			node_pointer node = find_node(k);
-			return (iteartor(node));
+			return (iterator(node));
 		}
 		const_iterator	find(const key_type& k) const
 		{
 			node_pointer node = find_node(k);
-			return (const_iteartor(node));
+			return (const_iterator(node));
 		}
 		size_type count(const key_type& k) const
 		{
@@ -269,7 +269,7 @@ class avl_tree
 		node_pointer lower_bound_node(const key_type& k) const
 		{
 			node_pointer node = root();
-			node_pointer result = end_();
+			node_pointer result = end_;
 			while (node)
 			{
 				if (!comp_(node->value_, k))
@@ -299,7 +299,7 @@ class avl_tree
 		node_pointer upper_bound_node(const key_type& k) const
 		{
 			node_pointer node = root();
-			node_pointer result = end();
+			node_pointer result = end_;
 			while (node)
 			{
 				if (comp_(k, node->value_))

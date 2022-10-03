@@ -2,6 +2,7 @@
 #include <string>
 #include <array>
 #include <vector>
+#include <utility>
 
 #define NC "\e[0m"
 #define RED "\e[0;31m"
@@ -88,11 +89,12 @@ int test4(void)
 		return (FAILURE);
 }
 
+/*
 int test5(void)
 {
 	int	ret;
 	PRE::map<int, char> m;
-	std::pair<const int, char> *p = m.get_allocator().allocate(2);
+	PRE::pair<const int, char> *p = m.get_allocator().allocate(2);
 
 	p[0].second = 'a';
 	p[1].second = 'b';
@@ -105,6 +107,7 @@ int test5(void)
 
 	return ret;
 }
+*/
 
 /*
 int test6(void)
@@ -137,7 +140,7 @@ int test6(void)
 int test7(void)
 {
 	PRE::map<int, char> m;
-	m.insert(std::make_pair(1, 'a'));
+	m.insert(PRE::make_pair(1, 'a'));
 
 	if (m[1] == 'a')
 		return SUCCESS;
@@ -205,7 +208,7 @@ int test10(void)
 	if (!m.empty())
 		return FAILURE;
 
-	m.insert(std::make_pair(42, 'a'));
+	m.insert(PRE::make_pair(42, 'a'));
 
 	if (m.empty())
 		return FAILURE;
@@ -220,9 +223,9 @@ int test11(void)
 	if (m.size() != 0)
 		return FAILURE;
 
-	m.insert(std::make_pair(1, 'a'));
-	m.insert(std::make_pair(2, 'b'));
-	m.insert(std::make_pair(3, 'c'));
+	m.insert(PRE::make_pair(1, 'a'));
+	m.insert(PRE::make_pair(2, 'b'));
+	m.insert(PRE::make_pair(3, 'c'));
 
 	if (m.size() != 3)
 		return FAILURE;
@@ -262,12 +265,12 @@ int test14(void)
 {
 	PRE::map<int, int> m;
 
-	m.insert(std::make_pair(3, 3));
+	m.insert(PRE::make_pair(3, 3));
 
 	PRE::map<int, int> tmp;
-	tmp.insert(std::make_pair(4, 4));
-	tmp.insert(std::make_pair(3, 3));
-	tmp.insert(std::make_pair(5, 5));
+	tmp.insert(PRE::make_pair(4, 4));
+	tmp.insert(PRE::make_pair(3, 3));
+	tmp.insert(PRE::make_pair(5, 5));
 
 	m.insert(tmp.begin(), tmp.end());
 
@@ -291,9 +294,9 @@ int test15(void)
 {
 	PRE::map<int, char> m;
 
-	m.insert(std::make_pair(1, 'A'));
-	m.insert(std::make_pair(2, 'B'));
-	m.insert(std::make_pair(3, 'C'));
+	m.insert(PRE::make_pair(1, 'A'));
+	m.insert(PRE::make_pair(2, 'B'));
+	m.insert(PRE::make_pair(3, 'C'));
 	std::cout << "check1" << std::endl;
 	if (m.size() != 3)
 		return FAILURE;
@@ -319,13 +322,13 @@ int test15(void)
 int test16(void)
 {
 	PRE::map<int, char> m1;
-	m1.insert(std::make_pair(1, 'A'));
-	m1.insert(std::make_pair(2, 'B'));
-	m1.insert(std::make_pair(3, 'C'));
+	m1.insert(PRE::make_pair(1, 'A'));
+	m1.insert(PRE::make_pair(2, 'B'));
+	m1.insert(PRE::make_pair(3, 'C'));
 
 	PRE::map<int, char> m2;
-	m2.insert(std::make_pair(4, 'D'));
-	m2.insert(std::make_pair(5, 'E'));
+	m2.insert(PRE::make_pair(4, 'D'));
+	m2.insert(PRE::make_pair(5, 'E'));
 
 	m1.swap(m2);
 	if (m1[4] != 'D'
@@ -345,9 +348,9 @@ int test16(void)
 int test17(void)
 {
 	PRE::map<std::string, int> m;
-	m.insert(std::make_pair("Alice", 3));
-	m.insert(std::make_pair("Bob", 1));
-	m.insert(std::make_pair("Carol", 4));
+	m.insert(PRE::make_pair("Alice", 3));
+	m.insert(PRE::make_pair("Bob", 1));
+	m.insert(PRE::make_pair("Carol", 4));
 
 	if (m.count("Bob") != 1)
 		return FAILURE;
@@ -360,9 +363,9 @@ int test17(void)
 int test18(void)
 {
 	PRE::map<std::string, int> m;
-	m.insert(std::make_pair("Alice", 3));
-	m.insert(std::make_pair("Bob", 1));
-	m.insert(std::make_pair("Carol", 4));
+	m.insert(PRE::make_pair("Alice", 3));
+	m.insert(PRE::make_pair("Bob", 1));
+	m.insert(PRE::make_pair("Carol", 4));
 
 	PRE::map<std::string, int>::iterator it;
 	it = m.find("Bob");
@@ -379,14 +382,14 @@ int test18(void)
 int test19(void)
 {
 	PRE::map<std::string, int> m;
-	m.insert(std::make_pair("A", 3));
-	m.insert(std::make_pair("B", 1));
-	m.insert(std::make_pair("C", 4));
-	m.insert(std::make_pair("D", 5));
+	m.insert(PRE::make_pair("A", 3));
+	m.insert(PRE::make_pair("B", 1));
+	m.insert(PRE::make_pair("C", 4));
+	m.insert(PRE::make_pair("D", 5));
 
 	typedef typename PRE::map<std::string, int>::iterator iterator;
 
-	std::pair<iterator, iterator> ret = m.equal_range("B");
+	PRE::pair<iterator, iterator> ret = m.equal_range("B");
 
 	for (iterator it = ret.first; it != ret.second; ++it)
 	{
@@ -400,12 +403,12 @@ int test19(void)
 int test20(void)
 {
 	PRE::map<int, int> m;
-	m.insert(std::make_pair(1, 1));
-	m.insert(std::make_pair(2, 2));
-	m.insert(std::make_pair(3, 3));
-	m.insert(std::make_pair(4, 4));
-	m.insert(std::make_pair(5, 5));
-	m.insert(std::make_pair(6, 6));
+	m.insert(PRE::make_pair(1, 1));
+	m.insert(PRE::make_pair(2, 2));
+	m.insert(PRE::make_pair(3, 3));
+	m.insert(PRE::make_pair(4, 4));
+	m.insert(PRE::make_pair(5, 5));
+	m.insert(PRE::make_pair(6, 6));
 
 	typedef typename PRE::map<int, int>::iterator iterator;
 
@@ -438,9 +441,9 @@ int test22(void)
 	PRE::map<int, char> c;
 	const PRE::map<int, char>::value_compare &comp = c.value_comp();
 
-	std::pair<int, char> p1 = std::make_pair(1, 'a');
-	std::pair<int, char> p2 = std::make_pair(2, 'b');
-	std::pair<int, char> p3 = std::make_pair(3, 'c');
+	PRE::pair<int, char> p1 = std::make_pair(1, 'a');
+	PRE::pair<int, char> p2 = std::make_pair(2, 'b');
+	PRE::pair<int, char> p3 = std::make_pair(3, 'c');
 
 	if (comp(p1, p2) != 1
 		|| comp(p3,p2) != 0)
@@ -468,15 +471,15 @@ int test23(void)
 int test24(void)
 {
 	PRE::map<char, int> m1, m2;
-	m1.insert(std::make_pair('a', 10));
-	m1.insert(std::make_pair('b', 20));
-	m1.insert(std::make_pair('c', 30));
+	m1.insert(PRE::make_pair('a', 10));
+	m1.insert(PRE::make_pair('b', 20));
+	m1.insert(PRE::make_pair('c', 30));
 	m2 = m1;
 
 	if (m1 < m2)
 		return FAILURE;
 
-	m2.insert(std::make_pair('d', 40));
+	m2.insert(PRE::make_pair('d', 40));
 
 	if (!(m1 < m2))
 		return FAILURE;
@@ -487,15 +490,15 @@ int test24(void)
 int test25(void)
 {
 	PRE::map<char, int> m1, m2;
-	m1.insert(std::make_pair('a', 10));
-	m1.insert(std::make_pair('b', 20));
-	m1.insert(std::make_pair('c', 30));
+	m1.insert(PRE::make_pair('a', 10));
+	m1.insert(PRE::make_pair('b', 20));
+	m1.insert(PRE::make_pair('c', 30));
 	m2 = m1;
 
 	if (!(m1 <= m2))
 		return FAILURE;
 
-	m2.insert(std::make_pair('d', 40));
+	m2.insert(PRE::make_pair('d', 40));
 
 	if (!(m1 < m2))
 		return FAILURE;
@@ -506,15 +509,15 @@ int test25(void)
 int test26(void)
 {
 	PRE::map<char, int> m1, m2;
-	m1.insert(std::make_pair('a', 10));
-	m1.insert(std::make_pair('b', 20));
-	m1.insert(std::make_pair('c', 30));
+	m1.insert(PRE::make_pair('a', 10));
+	m1.insert(PRE::make_pair('b', 20));
+	m1.insert(PRE::make_pair('c', 30));
 	m2 = m1;
 
 	if (m1 > m2)
 		return FAILURE;
 
-	m1.insert(std::make_pair('d', 40));
+	m1.insert(PRE::make_pair('d', 40));
 
 	if (!(m1 > m2))
 		return FAILURE;
@@ -525,15 +528,15 @@ int test26(void)
 int test27(void)
 {
 	PRE::map<char, int> m1, m2;
-	m1.insert(std::make_pair('a', 10));
-	m1.insert(std::make_pair('b', 20));
-	m1.insert(std::make_pair('c', 30));
+	m1.insert(PRE::make_pair('a', 10));
+	m1.insert(PRE::make_pair('b', 20));
+	m1.insert(PRE::make_pair('c', 30));
 	m2 = m1;
 
 	if (!(m1 >= m2))
 		return FAILURE;
 
-	m1.insert(std::make_pair('d', 40));
+	m1.insert(PRE::make_pair('d', 40));
 
 	if (!(m1 >= m2))
 		return FAILURE;
@@ -578,7 +581,8 @@ int main()
 	result.push_back(test2());
 	result.push_back(test3());
 	result.push_back(test4());
-	result.push_back(test5());
+	//result.push_back(test5());
+	result.push_back(FAILURE);
 	//result.push_back(test6());
 	result.push_back(FAILURE);
 	result.push_back(test7());
