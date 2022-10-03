@@ -11,7 +11,7 @@ namespace ft
 		public:
 
 			//Member types
-			typedef Countainer								container_type;
+			typedef Container								container_type;
 			typedef typename Container::value_type			value_type;
 			typedef typename Container::size_type			size_type;
 			typedef typename Container::reference			reference;
@@ -23,7 +23,7 @@ namespace ft
 		public:
 			// Member function
 			// constructor
-			explixit stack(const container_type& container = container_type()) : c(container) {}
+			explicit stack(const container_type& container = container_type()) : c(container) {}
 			stack(const stack& other) : c(other.c) {}
 			// destructor
 			~stack();
