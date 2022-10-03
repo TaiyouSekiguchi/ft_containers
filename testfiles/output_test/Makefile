@@ -47,6 +47,7 @@ test1:
 
 clean			:
 					$(RM) $(OBJS)
+					$(RM) output/ft_output output/std_output output/ft_err output/std_err
 
 fclean			:
 					$(RM) $(OBJS) $(NAME)
