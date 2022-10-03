@@ -2,6 +2,7 @@
 #define TESTER_HPP
 
 #include <iostream>
+#include "Number.hpp"
 
 #ifdef FT
 # define PRE ft
