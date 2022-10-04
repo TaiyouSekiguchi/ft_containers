@@ -149,6 +149,19 @@ static void const_reverse_iterator_test()
 	cout << "\n***********************************\n" << endl;
 }
 
+static void empty_test()
+{
+	cout << "************ empty ************\n" << endl;
+	PRE::vector<Number> v1;
+	test_put(v1);
+
+	PRE::vector<Number> v2(3, Number(42));
+	test_put(v2);
+
+	cout << "\n***********************************\n" << endl;
+}
+
+
 void vector_test()
 {
 	constructor_test();
@@ -158,4 +171,5 @@ void vector_test()
 	const_iterator_test();
 	reverse_iterator_test();
 	const_reverse_iterator_test();
+	empty_test();
 }
