@@ -24,34 +24,34 @@ $(OBJS_DIR)/%.o	:	%.cpp
 
 test			:
 					$(CXX) $(CXXFLAGS) $(SRCS) -D FT=1 -o $(NAME)
-					@./$(NAME) > output/ft_output 2>output/ft_err
+					@./$(NAME) > output/ft_output.txt 2>output/ft_err.txt
 					$(CXX) $(CXXFLAGS) $(SRCS) -o $(NAME)
-					@./$(NAME) > output/std_output 2>output/std_err
+					@./$(NAME) > output/std_output.txt 2>output/std_err.txt
  # ret(1) cause make error.  ||: force ret(0)
-					diff output/ft_output output/std_output ||:
-					@echo "---ft_err---"
-					@cat output/ft_err
-					@echo "---std_err---"
-					@cat output/std_err
+					diff output/ft_output.txt output/std_output.txt ||:
+					@echo "---ft_err.txt---"
+					@cat output/ft_err.txt
+					@echo "---std_err.txt---"
+					@cat output/std_err.txt
 
 test0			:
 					$(CXX) $(CXXFLAGS) $(SRCS) -D FT=1 -o $(NAME)
-					@./$(NAME) > output/ft_output 2>output/ft_err
-					@cat output/ft_output
-					@cat output/ft_err
+					@./$(NAME) > output/ft_output.txt 2>output/ft_err.txt
+					@cat output/ft_output.txt
+					@cat output/ft_err.txt
 
 test1			:
 					$(CXX) $(CXXFLAGS) $(SRCS) -o $(NAME)
-					@./$(NAME) > output/std_out 2>output/std_err
-					@cat output/std_output
-					@cat output/std_err
+					@./$(NAME) > output/std_out 2>output/std_err.txt
+					@cat output/std_output.txt
+					@cat output/std_err.txt
 
 clean			:
 					$(RM) $(OBJS)
-					$(RM) output/ft_output output/std_output output/ft_err output/std_err
+					$(RM) output/ft_output.txt output/std_output.txt output/ft_err.txt output/std_err.txt
 
 fclean			:
 					$(RM) $(OBJS) $(NAME)
-					$(RM) output/ft_output output/std_output output/ft_err output/std_err
+					$(RM) output/ft_output.txt output/std_output.txt output/ft_err.txt output/std_err.txt
 
 re				:	fclean all

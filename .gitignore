@@ -5,7 +5,7 @@ tags.
 .tags
 *.a
 *.o
-ft_output
-std_output
-ft_err
-std_err
+ft_output.txt
+std_output.txt
+ft_err.txt
+std_err.txt
