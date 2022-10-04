@@ -23,12 +23,12 @@ class vector
 		typedef std::ptrdiff_t 											difference_type;
 		typedef value_type&												reference;
 		typedef const value_type&										const_reference;
-		typedef typename Allocator::pointer										pointer;
-		typedef typename Allocator::const_pointer								const_pointer;
+		typedef typename Allocator::pointer								pointer;
+		typedef typename Allocator::const_pointer						const_pointer;
 		typedef typename ft::random_access_iterator<value_type>			iterator;
 		typedef typename ft::random_access_iterator<const value_type>	const_iterator;
 		typedef typename ft::reverse_iterator<iterator>					reverse_iterator;
-		typedef typename ft::reverse_iterator<const iterator>			const_reverse_iterator;
+		typedef typename ft::reverse_iterator<const_iterator>			const_reverse_iterator;
 
 		// Member functions
 		// constructor
@@ -54,6 +54,7 @@ class vector
 		{
 			resize(count, value);
 		}
+
 		template <typename InputIt>
 		vector(InputIt first, InputIt last,
 				const Allocator& alloc = Allocator(),

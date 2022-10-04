@@ -35,16 +35,16 @@ test			:
 					@cat output/std_err
 
 test0			:
-					$(CXX) $(CXXFLAGS)) $(SRCS) -DTEST=1 -o $(NAME)
-					@./$(NAME) > output/ft_output 2>ft_err
-					@cat ft_output
-					@cat ft_err
+					$(CXX) $(CXXFLAGS) $(SRCS) -D FT=1 -o $(NAME)
+					@./$(NAME) > output/ft_output 2>output/ft_err
+					@cat output/ft_output
+					@cat output/ft_err
 
 test1			:
-					$(CXX) $(CXXFLAGS)) $(SRCS) -o $(NAME)
-					@./$(NAME) > std_out 2>std_err
-					@cat std_out
-					@cat std_err
+					$(CXX) $(CXXFLAGS) $(SRCS) -o $(NAME)
+					@./$(NAME) > output/std_out 2>output/std_err
+					@cat output/std_output
+					@cat output/std_err
 
 clean			:
 					$(RM) $(OBJS)
