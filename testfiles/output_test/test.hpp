@@ -41,5 +41,6 @@
 
 // vector_test.cpp
 void vector_test();
+void stack_test();
 
 #endif
