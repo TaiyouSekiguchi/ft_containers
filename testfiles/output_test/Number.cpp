@@ -26,6 +26,36 @@ Number& Number::operator=(const Number& o)
 	return *this;
 }
 
+bool Number::operator==(const Number& o) const
+{
+	return (num_ == o.num_);
+}
+
+bool Number::operator!=(const Number& o) const
+{
+	return (num_ != o.num_);
+}
+
+bool Number::operator<(const Number& o) const
+{
+	return (num_ < o.num_);
+}
+
+bool Number::operator<=(const Number& o) const
+{
+	return (num_ <= o.num_);
+}
+
+bool Number::operator>(const Number& o) const
+{
+	return (num_ > o.num_);
+}
+
+bool Number::operator>=(const Number& o) const
+{
+	return (num_ >= o.num_);
+}
+
 int Number::getNum() const
 {
 	return num_;

@@ -12,6 +12,13 @@ class Number
 		~Number();
 		Number &operator=(const Number &o);
 
+		bool operator==(const Number &o) const;
+		bool operator!=(const Number &o) const;
+		bool operator<(const Number &o) const;
+		bool operator<=(const Number &o) const;
+		bool operator>(const Number &o) const;
+		bool operator>=(const Number &o) const;
+
 		int getNum() const;
 
 	private:

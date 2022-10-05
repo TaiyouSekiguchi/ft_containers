@@ -18,6 +18,7 @@
 # include <utility>
 #endif
 
+#include <array>
 
 #include <stdlib.h>
 #include <time.h> // clock()

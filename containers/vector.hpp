@@ -264,6 +264,7 @@ class vector
 				first_ = allocate(count);
 				last_ = first_;
 				reserved_last_ = first_ + count;
+
 				for (size_type i = 0; i < count; ++i)
 					construct(last_++, value);
 			}
@@ -488,8 +489,23 @@ class vector
 	private:
 
 		// function
-		pointer allocate(size_type n) { return alloc_.allocate(n); }
-		void deallocate() { alloc_.deallocate(first_, capacity()); }
+		pointer allocate(size_type n)
+		{
+			if (n > max_size())
+				throw std::length_error("vector");
+			return alloc_.allocate(n);
+		}
+
+		void deallocate()
+		{
+			if (first_ == NULL)
+				return;
+			alloc_.deallocate(first_, capacity());
+			first_ = NULL;
+			last_ = NULL;
+			reserved_last_ = NULL;
+		}
+
 		void construct(pointer ptr) { alloc_.construct(ptr); }
 		//void construct(pointer ptr) { alloc_.construct(ptr, 0); }
 		void construct(pointer ptr, const_reference value) { alloc_.construct(ptr, value); }
@@ -543,15 +559,12 @@ bool operator<=(const ft::vector<T, Allocator>& x, const ft::vector<T, Allocator
 	return !(y < x);
 }
 
-} // namespace ft
-
-namespace std
+template <class T, class Alloc>
+void swap(ft::vector<T, Alloc> &x, ft::vector<T, Alloc> &y)
 {
-	template <class T, class Alloc>
-	void swap(ft::vector<T, Alloc> &x, ft::vector<T, Alloc> &y)
-	{
-		x.swap(y);
-	}
-} // namespace std
+	x.swap(y);
+}
+
+} // namespace ft
 
 #endif
