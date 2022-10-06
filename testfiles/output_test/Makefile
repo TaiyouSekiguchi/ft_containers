@@ -2,7 +2,8 @@ NAME			=	a.out
 SRCS			=	main.cpp \
 					Number.cpp \
 					vector_test.cpp \
-					stack_test.cpp
+					stack_test.cpp \
+					map_test.cpp
 OBJS_DIR		=	./objs
 OBJS			=	$(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.o))
 

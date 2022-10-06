@@ -9,6 +9,7 @@
 # include "../../containers/vector.hpp"
 # include "../../containers/stack.hpp"
 # include "../../containers/map.hpp"
+# include "../../utils/pair.hpp"
 #else
 # define PRE std
 # include <vector>
@@ -42,5 +43,6 @@
 // vector_test.cpp
 void vector_test();
 void stack_test();
+void map_test();
 
 #endif

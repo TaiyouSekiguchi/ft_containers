@@ -77,6 +77,10 @@ class avl_tree
 		iterator end() { return (iterator(end_)); }
 		const_iterator end() const { return (const_iterator(end_)); }
 
+
+
+
+
 		size_type size() const { return (size_); }
 		size_type max_size() const { return (std::min<size_type>(node_alloc_.max_size(), std::numeric_limits<difference_type>::max())); }
 
@@ -124,13 +128,13 @@ class avl_tree
 
 			if (pos_node == end_ || comp_(val, pos_node->value_))
 			{
-				node_pointer prev_node = (pos_node == begin_) ? NULL : pos_node->node();
+				node_pointer prev_node = (pos_node == begin_) ? NULL : pos_node->prev_node();
 				if (pos_node == begin_ || comp_(prev_node->value_, val))
 					parent_node = (pos_node->left_ == NULL) ? pos_node : prev_node;
 				else
 					return (insert(val).first);
 			}
-			else if (comp_(pos_node->value, val))
+			else if (comp_(pos_node->value_, val))
 			{
 				node_pointer next_node = pos_node->next_node();
 				if (next_node == end_ || comp_(val, next_node->value_))

@@ -63,7 +63,7 @@ class map
 				typedef value_type		second_argument_type;
 				bool operator()(const value_type &x, const value_type &y) const
 				{
-					return comp(x.first, y.first);
+					return comp_(x.first, y.first);
 				}
 		};
 
@@ -125,13 +125,15 @@ class map
 		const_iterator begin() const { return (tree_.begin()); }
 		iterator end() { return (tree_.end()); }
 		const_iterator end() const { return (tree_.end()); }
-		reverse_iterator rbegin() { return (reverse_iterator(tree_.rbegin())); }
-		const_reverse_iterator rbegin() const { return (const_reverse_iterator(tree_.rbegin())); }
+
+		reverse_iterator rbegin() { return (reverse_iterator(tree_.end())); }
+		const_reverse_iterator rbegin() const { return (const_reverse_iterator(tree_.end())); }
+
 		reverse_iterator rend() { return (reverse_iterator(tree_.begin())); }
 		const_reverse_iterator rend() const { return (const_reverse_iterator(tree_.begin())); }
 
 		// Capacity
-		bool empty() { return (tree_.size() == 0); }
+		bool empty() const { return (tree_.size() == 0); }
 		size_type size() const { return (tree_.size()); }
 		size_type max_size() const { return (tree_.max_size()); }
 
