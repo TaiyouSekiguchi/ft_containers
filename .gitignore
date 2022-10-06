@@ -5,6 +5,8 @@ tags.
 .tags
 *.a
 *.o
+ft_benchmark
+std_benchmark
 ft_output.txt
 std_output.txt
 ft_err.txt
