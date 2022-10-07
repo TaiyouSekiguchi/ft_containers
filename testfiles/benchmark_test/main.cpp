@@ -2,6 +2,8 @@
 
 int main(void)
 {
+	srand((unsigned int)time(NULL));
+
 	Benchmark bm;
 
 	bm.VectorBenchmarking();

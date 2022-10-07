@@ -4,7 +4,7 @@
 ft_file=(`cat ./output/ft_benchmark.txt | xargs`)
 std_file=(`cat ./output/std_benchmark.txt | xargs`)
 
-printf "%-25s %15s %15s %10s\n" func_name ft_time std_time ratio
+printf "%-30s %15s %15s %10s\n" func_name ft_time std_time ratio
 
 # 一行ずつ処理するループ
 for ((i=0; i<${#ft_file[@]}; i++)); do
@@ -22,6 +22,6 @@ for ((i=0; i<${#ft_file[@]}; i++)); do
 	ft_time=${ft_line_list[1]}
 	std_time=${std_line_list[1]}
 	ratio=`echo "scale=3; ${ft_time} / ${std_time}" | bc`
-	printf "%-25s %15s %15s %10s\n" $func_name $ft_time $std_time $ratio
+	printf "%-30s %15s %15s %10s\n" $func_name $ft_time $std_time $ratio
 
 done
