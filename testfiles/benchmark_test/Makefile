@@ -27,6 +27,7 @@ benchmark			:
 					@./$(NAME) > output/ft_benchmark.txt 2>output/ft_err.txt
 					$(CXX) $(CXXFLAGS) $(SRCS) -o $(NAME)
 					@./$(NAME) > output/std_benchmark.txt 2>output/std_err.txt
+					sh compare.sh
 
 ft_benchmark		:
 					$(CXX) $(CXXFLAGS) $(SRCS) -D FT=1 -o $(NAME)
