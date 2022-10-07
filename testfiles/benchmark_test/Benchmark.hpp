@@ -27,7 +27,7 @@ class Benchmark
 		void VectorBenchmarking();
 
 	private:
-		void Benchmarking(std::string name, void (Benchmark::*f)());
+		void Benchmarking(std::string test_name, void (Benchmark::*f)());
 		void VectorDefaultConstructor();
 		void VectorArgConstructor();
 };

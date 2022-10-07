@@ -14,7 +14,7 @@ void Benchmark::VectorBenchmarking()
 	Benchmarking("VectorArgConstructor", &Benchmark::VectorArgConstructor);
 }
 
-void Benchmark::Benchmarking(std::string name, void (Benchmark::*f)())
+void Benchmark::Benchmarking(std::string test_name, void (Benchmark::*f)())
 {
 	Timer timer;
 
@@ -24,8 +24,7 @@ void Benchmark::Benchmarking(std::string name, void (Benchmark::*f)())
 		(this->*f)();
 		timer.stop();
 	}
-
-	std::cout << name << " " << timer.getElapsedTime() << std::endl;
+	std::cout << test_name << "," << timer.getElapsedTime() << std::endl;
 }
 
 void Benchmark::VectorDefaultConstructor()
