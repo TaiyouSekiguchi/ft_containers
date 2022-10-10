@@ -10,7 +10,6 @@ MapBenchmark::MapBenchmark()
 		m_[i] = i;
 	for (int i = 0; i < SIZE * 2; i++)
 		m2_[i] = i;
-
 	erase_m_ = m_;
 	swap_m1_ = m_;
 	swap_m2_ = m2_;
@@ -22,43 +21,43 @@ MapBenchmark::~MapBenchmark()
 
 void MapBenchmark::MapBenchmarking()
 {
-	MapBenchmarking("MapDefaultConstructor", &MapBenchmark::MapDefaultConstructor);
-	MapBenchmarking("MapIteratorConstructor", &MapBenchmark::MapIteratorConstructor);
-	MapBenchmarking("MapCopyConstructor", &MapBenchmark::MapCopyConstructor);
-	MapBenchmarking("MapCopyOperator", &MapBenchmark::MapCopyOperator);
-	MapBenchmarking("MapGetAllocator", &MapBenchmark::MapGetAllocator);
-	MapBenchmarking("MapAccessOperator", &MapBenchmark::MapAccessOperator);
-	MapBenchmarking("MapBegin", &MapBenchmark::MapBegin);
-	MapBenchmarking("MapEnd", &MapBenchmark::MapEnd);
-	MapBenchmarking("MapRbegin", &MapBenchmark::MapRbegin);
-	MapBenchmarking("MapRend", &MapBenchmark::MapRend);
-	MapBenchmarking("MapEmpty", &MapBenchmark::MapEmpty);
-	MapBenchmarking("MapSize", &MapBenchmark::MapSize);
-	MapBenchmarking("MapMaxSize", &MapBenchmark::MapMaxSize);
-	MapBenchmarking("MapClear", &MapBenchmark::MapClear);
-	MapBenchmarking("MapInsert", &MapBenchmark::MapInsert);
-	MapBenchmarking("MapInserts", &MapBenchmark::MapInserts);
-	MapBenchmarking2("MapInsertIterator", &MapBenchmark::MapInsertIterator);
-	MapBenchmarking("MapInsertErase", &MapBenchmark::MapErase);
-	MapBenchmarking("MapInsertEraseIterator", &MapBenchmark::MapEraseIterator);
-	MapBenchmarking("MapSwap", &MapBenchmark::MapSwap);
-	MapBenchmarking("MapCount", &MapBenchmark::MapCount);
-	MapBenchmarking("MapFind", &MapBenchmark::MapFind);
-	MapBenchmarking("MapEqualRange", &MapBenchmark::MapEqualRange);
-	MapBenchmarking("MapLowerBound", &MapBenchmark::MapLowerBound);
-	MapBenchmarking("MapUpperBound", &MapBenchmark::MapUpperBound);
-	MapBenchmarking("MapKeyComp", &MapBenchmark::MapKeyComp);
-	MapBenchmarking("MapValueComp", &MapBenchmark::MapValueComp);
-	MapBenchmarking("MapEqualOperator", &MapBenchmark::MapEqualOperator);
-	MapBenchmarking("MapNotEqualOperator", &MapBenchmark::MapNotEqualOperator);
-	MapBenchmarking("MapLessOperator", &MapBenchmark::MapLessOperator);
-	MapBenchmarking("MapLessEqualOperator", &MapBenchmark::MapLessEqualOperator);
-	MapBenchmarking("MapGreaterOperator", &MapBenchmark::MapGreaterOperator);
-	MapBenchmarking("MapGreaterEqualOperator", &MapBenchmark::MapGreaterEqualOperator);
-	// MapBenchmarking("MapNonMemberSwap", &MapBenchmark::MapNonMemberSwap);
+	Benchmarking("MapDefaultConstructor", &MapBenchmark::MapDefaultConstructor);
+	Benchmarking("MapIteratorConstructor", &MapBenchmark::MapIteratorConstructor);
+	Benchmarking("MapCopyConstructor", &MapBenchmark::MapCopyConstructor);
+	Benchmarking("MapCopyOperator", &MapBenchmark::MapCopyOperator);
+	Benchmarking("MapGetAllocator", &MapBenchmark::MapGetAllocator);
+	Benchmarking("MapAccessOperator", &MapBenchmark::MapAccessOperator);
+	Benchmarking("MapBegin", &MapBenchmark::MapBegin);
+	Benchmarking("MapEnd", &MapBenchmark::MapEnd);
+	Benchmarking("MapRbegin", &MapBenchmark::MapRbegin);
+	Benchmarking("MapRend", &MapBenchmark::MapRend);
+	Benchmarking("MapEmpty", &MapBenchmark::MapEmpty);
+	Benchmarking("MapSize", &MapBenchmark::MapSize);
+	Benchmarking("MapMaxSize", &MapBenchmark::MapMaxSize);
+	Benchmarking("MapClear", &MapBenchmark::MapClear);
+	Benchmarking("MapInsert", &MapBenchmark::MapInsert);
+	Benchmarking("MapInserts", &MapBenchmark::MapInserts);
+	Benchmarking2("MapInsertIterator", &MapBenchmark::MapInsertIterator);
+	Benchmarking("MapInsertErase", &MapBenchmark::MapErase);
+	Benchmarking("MapInsertEraseIterator", &MapBenchmark::MapEraseIterator);
+	Benchmarking("MapSwap", &MapBenchmark::MapSwap);
+	Benchmarking("MapCount", &MapBenchmark::MapCount);
+	Benchmarking("MapFind", &MapBenchmark::MapFind);
+	Benchmarking("MapEqualRange", &MapBenchmark::MapEqualRange);
+	Benchmarking("MapLowerBound", &MapBenchmark::MapLowerBound);
+	Benchmarking("MapUpperBound", &MapBenchmark::MapUpperBound);
+	Benchmarking("MapKeyComp", &MapBenchmark::MapKeyComp);
+	Benchmarking("MapValueComp", &MapBenchmark::MapValueComp);
+	Benchmarking("MapEqualOperator", &MapBenchmark::MapEqualOperator);
+	Benchmarking("MapNotEqualOperator", &MapBenchmark::MapNotEqualOperator);
+	Benchmarking("MapLessOperator", &MapBenchmark::MapLessOperator);
+	Benchmarking("MapLessEqualOperator", &MapBenchmark::MapLessEqualOperator);
+	Benchmarking("MapGreaterOperator", &MapBenchmark::MapGreaterOperator);
+	Benchmarking("MapGreaterEqualOperator", &MapBenchmark::MapGreaterEqualOperator);
+	Benchmarking("MapNonMemberSwap", &MapBenchmark::MapNonMemberSwap);
 }
 
-void MapBenchmark::MapBenchmarking(std::string test_name, void (MapBenchmark::*f)())
+void MapBenchmark::Benchmarking(std::string test_name, void (MapBenchmark::*f)())
 {
 	Timer timer;
 
@@ -71,8 +70,8 @@ void MapBenchmark::MapBenchmarking(std::string test_name, void (MapBenchmark::*f
 	std::cout << test_name << "," << timer.getElapsedTime() << std::endl;
 }
 
-void MapBenchmark::MapBenchmarking(std::string test_name,
-										 void (MapBenchmark::*f)(PRE::map<int, int> *vec))
+void MapBenchmark::Benchmarking(std::string test_name,
+									 void (MapBenchmark::*f)(PRE::map<int, int> *map))
 {
 	Timer timer;
 
@@ -87,8 +86,8 @@ void MapBenchmark::MapBenchmarking(std::string test_name,
 	std::cout << test_name << "," << timer.getElapsedTime() << std::endl;
 }
 
-void MapBenchmark::MapBenchmarking2(std::string test_name,
-										 void (MapBenchmark::*f)(PRE::map<int, int> *vec))
+void MapBenchmark::Benchmarking2(std::string test_name,
+									 void (MapBenchmark::*f)(PRE::map<int, int> *map))
 {
 	Timer timer;
 
@@ -106,11 +105,7 @@ void MapBenchmark::MapBenchmarking2(std::string test_name,
 void MapBenchmark::MapDefaultConstructor() { PRE::map<int, int> m; }
 void MapBenchmark::MapIteratorConstructor() { PRE::map<int, int> m(m_.begin(), m_.end()); }
 void MapBenchmark::MapCopyConstructor() { PRE::map<int, int> m(m_); }
-void MapBenchmark::MapCopyOperator()
-{
-	PRE::map<int, int> m;
-	m = cm_;
-}
+void MapBenchmark::MapCopyOperator() { PRE::map<int, int> m; m = cm_; }
 void MapBenchmark::MapGetAllocator() { m_.get_allocator(); }
 void MapBenchmark::MapAccessOperator() { m_[RandomNumber()]; }
 void MapBenchmark::MapBegin() { m_.begin(); }
@@ -120,7 +115,7 @@ void MapBenchmark::MapRend() { m_.rend(); }
 void MapBenchmark::MapEmpty() { m_.empty(); }
 void MapBenchmark::MapSize() { m_.size(); }
 void MapBenchmark::MapMaxSize() { m_.max_size(); }
-void MapBenchmark::MapClear(PRE::map<int, int> *vec) { vec->clear(); }
+void MapBenchmark::MapClear(PRE::map<int, int> *map) { map->clear(); }
 void MapBenchmark::MapInsert()
 {
 	int num = RandomInsertNumber();
@@ -131,17 +126,17 @@ void MapBenchmark::MapInserts()
 	int num = RandomInsertNumber();
 	insert_m2_.insert(insert_m2_.lower_bound(num),PRE::make_pair(num, num));
 }
-void MapBenchmark::MapInsertIterator(PRE::map<int, int> *vec)
+void MapBenchmark::MapInsertIterator(PRE::map<int, int> *map)
 {
-	vec->insert(m_.begin(), m_.end());
+	map->insert(m_.begin(), m_.end());
 }
-void MapBenchmark::MapErase(PRE::map<int, int> *vec)
+void MapBenchmark::MapErase(PRE::map<int, int> *map)
 {
-	vec->erase(vec->find(RandomNumber()));
+	map->erase(map->find(RandomNumber()));
 }
-void MapBenchmark::MapEraseIterator(PRE::map<int, int> *vec)
+void MapBenchmark::MapEraseIterator(PRE::map<int, int> *map)
 {
-	vec->erase(vec->begin(), vec->end());
+	map->erase(map->begin(), map->end());
 }
 void MapBenchmark::MapSwap() { swap_m1_.swap(swap_m2_); }
 void MapBenchmark::MapCount() { m_.count(RandomNumber()); }

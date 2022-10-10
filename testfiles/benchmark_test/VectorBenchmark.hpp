@@ -12,8 +12,8 @@ class VectorBenchmark
 		void VectorBenchmarking();
 
 	private:
-		void VectorBenchmarking(std::string test_name, void (VectorBenchmark::*f)());
-		void VectorBenchmarking(std::string test_name,
+		void Benchmarking(std::string test_name, void (VectorBenchmark::*f)());
+		void Benchmarking(std::string test_name,
 							void (VectorBenchmark::*f)(PRE::vector<int> *vec));
 		void VectorDefaultConstructor();
 		void VectorArgConstructor();
@@ -67,7 +67,6 @@ class VectorBenchmark
 		PRE::vector<int> resize_v_;
 		PRE::vector<int> swap1_v_;
 		PRE::vector<int> swap2_v_;
-
-};
+}; // class VectorBenchmark
 
 #endif // VECTORBENCHMARK_HPP

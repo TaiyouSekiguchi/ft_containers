@@ -12,11 +12,11 @@ class MapBenchmark
 		void MapBenchmarking();
 
 	private:
-		void MapBenchmarking(std::string test_name, void (MapBenchmark::*f)());
-		void MapBenchmarking(std::string test_name,
-								void (MapBenchmark::*f)(PRE::map<int, int> *vec));
-		void MapBenchmarking2(std::string test_name,
-								void (MapBenchmark::*f)(PRE::map<int, int> *vec));
+		void Benchmarking(std::string test_name, void (MapBenchmark::*f)());
+		void Benchmarking(std::string test_name,
+								void (MapBenchmark::*f)(PRE::map<int, int> *map));
+		void Benchmarking2(std::string test_name,
+								void (MapBenchmark::*f)(PRE::map<int, int> *map));
 		void MapDefaultConstructor();
 		void MapIteratorConstructor();
 		void MapCopyConstructor();
@@ -30,12 +30,12 @@ class MapBenchmark
 		void MapEmpty();
 		void MapSize();
 		void MapMaxSize();
-		void MapClear(PRE::map<int, int> *vec);
+		void MapClear(PRE::map<int, int> *map);
 		void MapInsert();
 		void MapInserts();
-		void MapInsertIterator(PRE::map<int, int> *vec);
-		void MapErase(PRE::map<int, int> *vec);
-		void MapEraseIterator(PRE::map<int, int> *vec);
+		void MapInsertIterator(PRE::map<int, int> *map);
+		void MapErase(PRE::map<int, int> *map);
+		void MapEraseIterator(PRE::map<int, int> *map);
 		void MapSwap();
 		void MapCount();
 		void MapFind();
@@ -59,11 +59,8 @@ class MapBenchmark
 		PRE::map<int, int> insert_m1_;
 		PRE::map<int, int> insert_m2_;
 		PRE::map<int, int> erase_m_;
-
 		PRE::map<int, int> swap_m1_;
 		PRE::map<int, int> swap_m2_;
-
-
-};
+}; // class MapBenchmark
 
 #endif // MAPBENCHMARK_HPP
