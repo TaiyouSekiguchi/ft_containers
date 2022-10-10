@@ -1,12 +1,15 @@
-#include "Benchmark.hpp"
+#include "VectorBenchmark.hpp"
+#include "StackBenchmark.hpp"
 
 int main(void)
 {
 	srand((unsigned int)time(NULL));
 
-	Benchmark bm;
+	VectorBenchmark vbm;
+	// StackBenchmark sbm;
 
-	bm.VectorBenchmarking();
+	vbm.VectorBenchmarking();
+	// sbm.StackBenchmarking();
 
 	return (0);
 }

@@ -1,7 +1,8 @@
 NAME			=	a.out
 SRCS			=	main.cpp \
-					Benchmark.cpp \
-					Timer.cpp
+					Timer.cpp \
+					VectorBenchmark.cpp \
+					StackBenchmark.cpp
 OBJS_DIR		=	./objs
 OBJS			=	$(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.o))
 
