@@ -283,8 +283,8 @@ bool operator>=(const ft::map<key, T, compare, alloc>& x,
 	return !(x < y);
 }
 template<class key, class T, class compare, class alloc>
-void swap(const ft::map<key, T, compare, alloc>& x,
-			const ft::map<key, T, compare, alloc>& y)
+void swap(ft::map<key, T, compare, alloc>& x,
+			ft::map<key, T, compare, alloc>& y)
 {
 	x.swap(y);
 }
