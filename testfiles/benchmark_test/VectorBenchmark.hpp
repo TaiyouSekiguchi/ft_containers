@@ -1,5 +1,5 @@
-#ifndef BENCHMARK_HPP
-#define BENCHMARK_HPP
+#ifndef VECTORBENCHMARK_HPP
+#define VECTORBENCHMARK_HPP
 
 #include <iostream>
 #include <ctime> // time
@@ -22,18 +22,18 @@
 
 #define SIZE 1000
 
-class Benchmark
+class VectorBenchmark
 {
 	public:
-		Benchmark();
-		~Benchmark();
+		VectorBenchmark();
+		~VectorBenchmark();
 
 		void VectorBenchmarking();
 
 	private:
-		void Benchmarking(std::string test_name, void (Benchmark::*f)());
-		void Benchmarking(std::string test_name,
-							void (Benchmark::*f)(PRE::vector<int> *vec));
+		void VectorBenchmarking(std::string test_name, void (VectorBenchmark::*f)());
+		void VectorBenchmarking(std::string test_name,
+							void (VectorBenchmark::*f)(PRE::vector<int> *vec));
 		void VectorDefaultConstructor();
 		void VectorArgConstructor();
 		void VectorIteratorConstructor();
@@ -89,4 +89,4 @@ class Benchmark
 
 };
 
-#endif // BENCHMARK_HPP
+#endif // VECTORBENCHMARK_HPP
