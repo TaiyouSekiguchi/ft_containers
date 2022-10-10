@@ -32,7 +32,6 @@ public:
 
 private:
 	void Benchmarking(std::string test_name, void (StackBenchmark::*f)());
-	//void Benchmarking(std::string test_name, void (StackBenchmark::*f)(PRE::stack<int> *vec));
 	void StackDefaultConstructor();
 	void StackCopyConstructor();
 	void StackCopyOperator();

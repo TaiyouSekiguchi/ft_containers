@@ -44,35 +44,17 @@ void StackBenchmark::Benchmarking(std::string test_name, void (StackBenchmark::*
 	std::cout << test_name << "," << timer.getElapsedTime() << std::endl;
 }
 
-/*
-void StackBenchmark::StackBenchmarking(std::string test_name,
-										 void (StackBenchmark::*f)(PRE::stack<int> *vec))
-{
-	Timer timer;
-
-	for (int i = 0; i < SIZE; i++)
-	{
-		PRE::stack<int> tmp(SIZE, 33);
-
-		timer.start();
-		(this->*f)(&tmp);
-		timer.stop();
-	}
-	std::cout << test_name << "," << timer.getElapsedTime() << std::endl;
-}
-*/
-
-void StackBenchmark::StackDefaultConstructor() { PRE::stack<int> s; }
-void StackBenchmark::StackCopyConstructor() { PRE::stack<int> s(s_); }
-void StackBenchmark::StackCopyOperator() { PRE::stack<int> s; s = cs_; }
-void StackBenchmark::StackTop() { s_.top(); }
-void StackBenchmark::StackEmpty() { s_.empty(); }
-void StackBenchmark::StackSize() { s_.size(); }
-void StackBenchmark::StackPush() { push_pop_s_.push(42); }
-void StackBenchmark::StackPop() { push_pop_s_.pop(); }
-void StackBenchmark::StackEqualOperator() { (void)(cs_ == cs2_); }
-void StackBenchmark::StackNotEqualOperator() { (void)(cs_ != cs2_); }
-void StackBenchmark::StackLessOperator() { (void)(cs_ < cs2_); }
-void StackBenchmark::StackLessEqualOperator() { (void)(cs_ <= cs2_); }
-void StackBenchmark::StackGreaterOperator() { (void)(cs_ > cs2_); }
-void StackBenchmark::StackGreaterEqualOperator() { (void)(cs_ > cs2_); }
+void StackBenchmark::StackDefaultConstructor()		{ PRE::stack<int> s; }
+void StackBenchmark::StackCopyConstructor()			{ PRE::stack<int> s(s_); }
+void StackBenchmark::StackCopyOperator()			{ PRE::stack<int> s; s = cs_; }
+void StackBenchmark::StackTop()						{ s_.top(); }
+void StackBenchmark::StackEmpty()					{ s_.empty(); }
+void StackBenchmark::StackSize()					{ s_.size(); }
+void StackBenchmark::StackPush() 					{ push_pop_s_.push(42); }
+void StackBenchmark::StackPop() 					{ push_pop_s_.pop(); }
+void StackBenchmark::StackEqualOperator()			{ (void)(cs_ == cs2_); }
+void StackBenchmark::StackNotEqualOperator()		{ (void)(cs_ != cs2_); }
+void StackBenchmark::StackLessOperator()			{ (void)(cs_ < cs2_); }
+void StackBenchmark::StackLessEqualOperator()		{ (void)(cs_ <= cs2_); }
+void StackBenchmark::StackGreaterOperator() 		{ (void)(cs_ > cs2_); }
+void StackBenchmark::StackGreaterEqualOperator()	{ (void)(cs_ > cs2_); }
