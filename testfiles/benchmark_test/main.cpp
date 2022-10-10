@@ -6,10 +6,10 @@ int main(void)
 	srand((unsigned int)time(NULL));
 
 	VectorBenchmark vbm;
-	// StackBenchmark sbm;
+	StackBenchmark sbm;
 
 	vbm.VectorBenchmarking();
-	// sbm.StackBenchmarking();
+	sbm.StackBenchmarking();
 
 	return (0);
 }

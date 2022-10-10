@@ -1,26 +1,7 @@
 #ifndef STACKBENCHMARK_HPP
 #define STACKBENCHMARK_HPP
 
-#include <iostream>
-#include <ctime>   // time
-#include <cstdlib> // srand, rand
-#include "Timer.hpp"
-
-#ifdef FT
-#define PRE ft
-#include "../../containers/vector.hpp"
-#include "../../containers/stack.hpp"
-#include "../../containers/map.hpp"
-#else
-#define PRE std
-#include <vector>
-#include <stack>
-#include <map>
-#include <iterator>
-#include <utility>
-#endif
-
-#define SIZE 1000
+#include "benchmark_test.hpp"
 
 class StackBenchmark
 {
