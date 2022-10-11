@@ -1,9 +1,8 @@
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
 
-# include <iostream>
-# include <limits>
 # include <memory>
+# include <limits>
 
 # include "../utils/algorithm.hpp"
 # include "../utils/iterator.hpp"
@@ -36,13 +35,17 @@ class vector
 			: first_(NULL)
 			, last_(NULL)
 			, reserved_last_(NULL)
-			, alloc_(allocator_type()) {}
+			, alloc_(allocator_type())
+		{
+		}
 
 		explicit vector(const allocator_type &alloc)
 			: first_(NULL)
 			, last_(NULL)
 			, reserved_last_(NULL)
-			, alloc_(alloc) {}
+			, alloc_(alloc)
+		{
+		}
 
 		explicit vector(size_type count,
 						const T& value = T(),
@@ -71,14 +74,6 @@ class vector
 			}
 		}
 
-		// destructor
-		~vector()
-		{
-			clear();
-			deallocate();
-		}
-
-		// copy
 		vector(const vector &r)
 			: first_(NULL)
 			, last_(NULL)
@@ -92,6 +87,13 @@ class vector
 				construct(dest, *src);
 			}
 			last_ = first_ + r.size();
+		}
+
+		// destructor
+		~vector()
+		{
+			clear();
+			deallocate();
 		}
 
 		vector &operator=(const vector &r)
@@ -126,23 +128,23 @@ class vector
 		}
 
 		// operator
-		reference operator [](size_type i) { return first_[i]; }
-		const_reference operator [](size_type i) const { return first_[i]; }
+		reference operator [](size_type i)				{ return first_[i]; }
+		const_reference operator [](size_type i) const	{ return first_[i]; }
 
 		// iterator
-		iterator begin() { return first_; }
-		const_iterator begin() const { return first_; }
-		iterator end() { return last_; }
-		const_iterator end() const { return last_; }
-		reverse_iterator rbegin() { return reverse_iterator(last_); }
-		const_reverse_iterator rbegin() const { return reverse_iterator(last_); }
-		reverse_iterator rend() { return reverse_iterator(first_); }
-		const_reverse_iterator rend() const { return reverse_iterator(first_); }
+		iterator begin() 							{ return first_; }
+		const_iterator begin() const 				{ return first_; }
+		iterator end() 								{ return last_; }
+		const_iterator end() const					{ return last_; }
+		reverse_iterator rbegin()					{ return reverse_iterator(last_); }
+		const_reverse_iterator rbegin() const		{ return reverse_iterator(last_); }
+		reverse_iterator rend()						{ return reverse_iterator(first_); }
+		const_reverse_iterator rend() const			{ return reverse_iterator(first_); }
 
 		// function
-		size_type size() const { return end() - begin(); }
-		bool empty() const { return begin() == end(); }
-		size_type capacity() const { return reserved_last_ - first_; }
+		size_type size() const 			{ return end() - begin(); }
+		bool empty() const				{ return begin() == end(); }
+		size_type capacity() const 		{ return reserved_last_ - first_; }
 		size_type max_size() const
 		{
 			size_t div = sizeof(value_type);
@@ -164,13 +166,13 @@ class vector
 
 			return first_[i];
 		}
-		reference front() { return *first_; }
-		const_reference front() const { return *first_; }
-		reference back() { return *(last_ - 1); }
-		const_reference back() const { return *(last_ - 1); }
-		pointer data() { return first_; }
-		const_pointer data() const { return first_; }
-		void clear() { destroy_until(rend()); }
+		reference front() 					{ return *first_; }
+		const_reference front() const		{ return *first_; }
+		reference back() 					{ return *(last_ - 1); }
+		const_reference back() const 		{ return *(last_ - 1); }
+		pointer data() 						{ return first_; }
+		const_pointer data() const 			{ return first_; }
+		void clear() 						{ destroy_until(rend()); }
 		void reserve(size_type sz)
 		{
 			if (sz <= capacity())
@@ -507,7 +509,6 @@ class vector
 		}
 
 		void construct(pointer ptr) { alloc_.construct(ptr); }
-		//void construct(pointer ptr) { alloc_.construct(ptr, 0); }
 		void construct(pointer ptr, const_reference value) { alloc_.construct(ptr, value); }
 		void destroy(pointer ptr) { alloc_.destroy(ptr); }
 		void destroy_until(reverse_iterator rend)
@@ -518,7 +519,7 @@ class vector
 			}
 		}
 
-		protected:
+	protected:
 		// data member
 		pointer first_;
 		pointer last_;
@@ -533,26 +534,31 @@ bool operator==(const ft::vector<T, Allocator>& x, const ft::vector<T, Allocator
 {
 	return x.size() == y.size() && ft::equal(x.begin(), x.end(), y.begin());
 }
+
 template <typename T, typename Allocator>
 bool operator!=(const ft::vector<T, Allocator>& x, const ft::vector<T, Allocator>& y)
 {
 	return !(x == y);
 }
+
 template <typename T, typename Allocator>
 bool operator<(const ft::vector<T, Allocator>& x, const ft::vector<T, Allocator>& y)
 {
 	return ft::lexicographical_compare(x.begin(), x.end(), y.begin(), y.end());
 }
+
 template <typename T, typename Allocator>
 bool operator>(const ft::vector<T, Allocator>& x, const ft::vector<T, Allocator>& y)
 {
 	return y < x;
 }
+
 template <typename T, typename Allocator>
 bool operator>=(const ft::vector<T, Allocator>& x, const ft::vector<T, Allocator>& y)
 {
 	return !(x < y);
 }
+
 template <typename T, typename Allocator>
 bool operator<=(const ft::vector<T, Allocator>& x, const ft::vector<T, Allocator>& y)
 {
