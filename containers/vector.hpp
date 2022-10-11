@@ -348,7 +348,6 @@ class vector
 
 			iterator tail = last_ - 1;
 			iterator range_end = begin() + offset + count - 1;
-			// pos + count - 1 までmemmove
 			for (; tail > range_end; --tail)
 				*tail = *(tail - count);
 			iterator range_begin = begin() + offset - 1;
@@ -385,7 +384,6 @@ class vector
 
 			iterator tail = last_ - 1;
 			iterator range_end = begin() + offset + count - 1;
-			// pos + count - 1 までmemmove
 			for (; tail > range_end; --tail)
 				*tail = *(tail - count);
 			iterator range_begin = begin() + offset - 1;
@@ -424,7 +422,6 @@ class vector
 
 			iterator tail = last_ - 1;
 			iterator range_end = begin() + offset + count - 1;
-			// pos + count - 1 までmemmove
 			for (; tail > range_end; --tail)
 				*tail = *(tail - count);
 			iterator range_begin = begin() + offset - 1;
