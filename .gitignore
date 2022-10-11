@@ -11,3 +11,5 @@ ft_output.txt
 std_output.txt
 ft_err.txt
 std_err.txt
+ft_test
+std_test
