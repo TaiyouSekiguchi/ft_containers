@@ -61,7 +61,7 @@ void MapBenchmark::Benchmarking(std::string test_name, void (MapBenchmark::*f)()
 {
 	Timer timer;
 
-	for (int i = 0; i < SIZE; i++)
+	for (int i = 0; i < 1000; i++)
 	{
 		timer.start();
 		(this->*f)();
@@ -75,7 +75,7 @@ void MapBenchmark::Benchmarking(std::string test_name,
 {
 	Timer timer;
 
-	for (int i = 0; i < SIZE; i++)
+	for (int i = 0; i < 1000; i++)
 	{
 		PRE::map<int, int> tmp(cm_);
 
@@ -91,7 +91,7 @@ void MapBenchmark::Benchmarking2(std::string test_name,
 {
 	Timer timer;
 
-	for (int i = 0; i < SIZE; i++)
+	for (int i = 0; i < 1000; i++)
 	{
 		PRE::map<int, int> tmp;
 

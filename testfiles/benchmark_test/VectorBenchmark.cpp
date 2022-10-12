@@ -27,7 +27,7 @@ void VectorBenchmark::VectorBenchmarking()
 	Benchmarking("VectorCopyConstructor", &VectorBenchmark::VectorCopyConstructor);
 	Benchmarking("VectorCopyOperator", &VectorBenchmark::VectorCopyOperator);
 	Benchmarking("VectorAssign", &VectorBenchmark::VectorAssign);
-	Benchmarking("VectorAssign", &VectorBenchmark::VectorAssignIterator);
+	Benchmarking("VectorAssignIterator", &VectorBenchmark::VectorAssignIterator);
 	Benchmarking("VectorGetAllocator", &VectorBenchmark::VectorGetAllocator);
 	Benchmarking("VectorAt", &VectorBenchmark::VectorAt);
 	Benchmarking("VectorAccessOperator", &VectorBenchmark::VectorAccessOperator);
@@ -66,7 +66,7 @@ void VectorBenchmark::Benchmarking(std::string test_name, void (VectorBenchmark:
 {
 	Timer timer;
 
-	for (int i = 0; i < SIZE; i++)
+	for (int i = 0; i < 1000; i++)
 	{
 		timer.start();
 		(this->*f)();
@@ -80,7 +80,7 @@ void VectorBenchmark::Benchmarking(std::string test_name,
 {
 	Timer timer;
 
-	for (int i = 0; i < SIZE; i++)
+	for (int i = 0; i < 1000; i++)
 	{
 		PRE::vector<int> tmp(SIZE, 33);
 

@@ -35,7 +35,7 @@ void StackBenchmark::Benchmarking(std::string test_name, void (StackBenchmark::*
 {
 	Timer timer;
 
-	for (int i = 0; i < SIZE; i++)
+	for (int i = 0; i < 1000; i++)
 	{
 		timer.start();
 		(this->*f)();
