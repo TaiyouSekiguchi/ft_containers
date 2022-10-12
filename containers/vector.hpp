@@ -486,7 +486,6 @@ class vector
 			*/
 			destroy_until(last_ - destroy_diff);
 			//destroy_until(rbegin() + destroy_diff);
-			last_ -= destroy_diff;
 
 			return (first);
 		}
