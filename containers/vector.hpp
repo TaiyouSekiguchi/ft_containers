@@ -84,7 +84,7 @@ class vector
 		{
 			reserve(r.size());
 			pointer dest = first_;
-			for (const_iterator src = r.begin(), last_ = r.end(); src != last_; ++dest, ++src)
+			for (pointer src = r.first_, last_ = r.last_; src != last_; ++dest, ++src)
 			{
 				construct(dest, *src);
 			}
@@ -108,13 +108,14 @@ class vector
 				std::copy(r.begin(), r.end(), begin());
 			}
 			else
+			{
 				if (capacity() >= r.size())
 				{
 					std::copy(r.begin(), r.begin() + r.size(), begin());
 					last_ = first_ + r.size();
-					for (const_iterator src_iter = r.begin() + r.size(), src_end = r.end(); src_iter != src_end; ++src_iter, ++last_)
+					for (pointer src_ptr = r.first_ + r.size(), src_end = r.last_; src_ptr != src_end; ++src_ptr, ++last_)
 					{
-						construct(last_, *src_iter);
+						construct(last_, *src_ptr);
 					}
 				}
 				else
@@ -122,11 +123,12 @@ class vector
 					clear();
 					//destroy_until();
 					reserve(r.size());
-					for (const_iterator src_iter = r.begin(), src_end = r.end(); src_iter != src_end; ++src_iter, ++last_)
+					for (pointer src_ptr = r.first_, src_end = r.last_; src_ptr != src_end; ++src_ptr, ++last_)
 					{
-						construct(last_, *src_iter);
+						construct(last_, *src_ptr);
 					}
 				}
+			}
 			return *this;
 		}
 
@@ -195,10 +197,17 @@ class vector
 				construct(last_, *old_iter);
 			}
 
+			for (pointer ptr = old_last - 1, rend = old_first - 1; ptr != rend; --ptr)
+			{
+				destroy(ptr);
+			}
+
+			/*
 			for (reverse_iterator riter = reverse_iterator(old_last), rend = reverse_iterator(old_first); riter != rend; ++riter)
 			{
 				destroy(&*riter);
 			}
+			*/
 			alloc_.deallocate(old_first, old_capacity);
 		}
 
@@ -288,9 +297,10 @@ class vector
 			{
 				pointer new_last = first_ + count;
 				std::fill(first_, new_last, value);
-				for (; new_last != last_; ++new_last)
+				pointer ptr = new_last;
+				for (; ptr != last_; ++ptr)
 				{
-					destroy(new_last);
+					destroy(ptr);
 				}
 				last_ = new_last;
 			}
@@ -329,17 +339,12 @@ class vector
 			{
 				pointer new_last = first_ + count;
 				std::copy(src_first, src_last, first_);
-				for (;new_last != last_; ++new_last)
+				pointer ptr = new_last;
+				for (; ptr != last_; ++ptr)
 				{
-					destroy(new_last);
+					destroy(ptr);
 				}
 				last_ = new_last;
-
-				/*
-				clear();
-				for (InputIt head = src_first; head != src_last; ++head)
-					construct(last_++, *head);
-				*/
 			}
 		}
 		iterator insert(iterator pos, const T &value)
@@ -366,8 +371,11 @@ class vector
 
 			iterator tail = last_ - 1;
 			iterator range_end = begin() + offset + count - 1;
+
 			for (; tail > range_end; --tail)
 				*tail = *(tail - count);
+
+
 			iterator range_begin = begin() + offset - 1;
 			for (; tail > range_begin; --tail)
 				*tail = value;
@@ -529,15 +537,19 @@ class vector
 		void construct(pointer ptr) { alloc_.construct(ptr); }
 		void construct(pointer ptr, const_reference value) { alloc_.construct(ptr, value); }
 		void destroy(pointer ptr) { alloc_.destroy(ptr); }
+
 		void destroy_until(pointer new_last)
 		{
+			if (new_last == last_)
+				return;
+
 			pointer ptr = last_ - 1;
-			for (; ptr != new_last; --ptr)
+			for (; ptr != new_last; --ptr, --last_)
 			{
-				std::cout << "test1" << std::endl;
 				destroy(ptr);
 			}
 			destroy(ptr);
+			--last_;
 		}
 		/*
 		void destroy_until(reverse_iterator rend)
