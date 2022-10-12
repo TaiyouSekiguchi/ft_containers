@@ -202,12 +202,6 @@ class vector
 				destroy(ptr);
 			}
 
-			/*
-			for (reverse_iterator riter = reverse_iterator(old_last), rend = reverse_iterator(old_first); riter != rend; ++riter)
-			{
-				destroy(&*riter);
-			}
-			*/
 			alloc_.deallocate(old_first, old_capacity);
 		}
 
@@ -463,10 +457,17 @@ class vector
 
 			difference_type offset = pos - begin();
 
+			for (pointer src = pos.base() + 1; src < last_; ++src)
+			{
+					*(src - 1) = *src;
+			}
+
+			/*
 			for (iterator src = pos + 1; src < end(); ++src)
 			{
 				*(src - 1) = *src;
 			}
+			*/
 			destroy(--last_);
 			return (begin() + offset);
 		}
