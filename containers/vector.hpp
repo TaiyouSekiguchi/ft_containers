@@ -119,7 +119,8 @@ class vector
 				}
 				else
 				{
-					destroy_until(rbegin());
+					clear();
+					//destroy_until();
 					reserve(r.size());
 					for (const_iterator src_iter = r.begin(), src_end = r.end(); src_iter != src_end; ++src_iter, ++last_)
 					{
@@ -174,7 +175,7 @@ class vector
 		const_reference back() const 		{ return *(last_ - 1); }
 		pointer data() 						{ return first_; }
 		const_pointer data() const 			{ return first_; }
-		void clear() 						{ destroy_until(rend()); }
+		void clear() 						{ destroy_until(first_); }
 		void reserve(size_type sz)
 		{
 			if (sz <= capacity())
@@ -205,8 +206,8 @@ class vector
 		{
 			if (sz < size())
 			{
-				size_type diff = size() - sz;
-				destroy_until(rbegin() + diff);
+				// size_type diff = size() - sz;
+				destroy_until(first_ + sz);
 				last_ = first_ + sz;
 			}
 			else if (sz > size())
@@ -223,8 +224,8 @@ class vector
 		{
 			if (sz < size())
 			{
-				size_type diff = size() - sz;
-				destroy_until(rbegin() + diff);
+				// size_type diff = size() - sz;
+				destroy_until(first_ + sz);
 				last_ = first_ + sz;
 			}
 			else if (sz > size())
@@ -285,9 +286,13 @@ class vector
 			}
 			else
 			{
-				clear();
-				for (size_type i = 0; i < count; ++i)
-					construct(last_++, value);
+				pointer new_last = first_ + count;
+				std::fill(first_, new_last, value);
+				for (; new_last != last_; ++new_last)
+				{
+					destroy(new_last);
+				}
+				last_ = new_last;
 			}
 		}
 
@@ -463,16 +468,19 @@ class vector
 			if (first_ == last_)
 				return NULL;
 
-			difference_type return_diff = first - begin();
 			difference_type destroy_diff = last - first;
-
+			std::copy(last.base(), last_, first.base());
+			/*
 			for (iterator dst = first, src = last; src < end(); ++dst, ++src)
 			{
 				*dst = *src;
 			}
-			destroy_until(rbegin() + destroy_diff);
+			*/
+			destroy_until(last_ - destroy_diff);
+			//destroy_until(rbegin() + destroy_diff);
+			last_ -= destroy_diff;
 
-			return (begin() + return_diff);
+			return (first);
 		}
 
 		void swap(vector &other)
@@ -521,6 +529,17 @@ class vector
 		void construct(pointer ptr) { alloc_.construct(ptr); }
 		void construct(pointer ptr, const_reference value) { alloc_.construct(ptr, value); }
 		void destroy(pointer ptr) { alloc_.destroy(ptr); }
+		void destroy_until(pointer new_last)
+		{
+			pointer ptr = last_ - 1;
+			for (; ptr != new_last; --ptr)
+			{
+				std::cout << "test1" << std::endl;
+				destroy(ptr);
+			}
+			destroy(ptr);
+		}
+		/*
 		void destroy_until(reverse_iterator rend)
 		{
 			for (reverse_iterator riter = rbegin(); riter != rend; ++riter, --last_)
@@ -528,6 +547,7 @@ class vector
 				destroy(&*riter);
 			}
 		}
+		*/
 
 	protected:
 		// data member
