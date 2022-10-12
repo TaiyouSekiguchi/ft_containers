@@ -2,11 +2,11 @@
 #define TESTER_HPP
 
 #include <iostream>
-#include "Number.hpp"
+#include "Fixed.hpp"
 
 #ifdef FT
 # define PRE ft
-# include "../../containers/vector.hpp"
+# include "../../containers/new_vector.hpp"
 # include "../../containers/stack.hpp"
 # include "../../containers/map.hpp"
 # include "../../utils/pair.hpp"

@@ -1,6 +1,6 @@
 #include "test.hpp"
 
-static void test_put(const PRE::vector<Number>& v)
+static void test_put(const PRE::vector<Fixed>& v)
 {
 	cout << "empty()     : " << v.empty() << endl;
 	cout << "size()      : " << v.size() << endl;
@@ -12,7 +12,7 @@ static void test_put(const PRE::vector<Number>& v)
 	cout << "]\n" << endl;
 }
 
-static void test_put2(const PRE::vector<Number>& v, const PRE::vector<Number>::iterator& it)
+static void test_put2(const PRE::vector<Fixed>& v, const PRE::vector<Fixed>::iterator& it)
 {
 	cout << "empty()   : " << v.empty() << endl;
 	cout << "size()    : " << v.size() << endl;
@@ -32,19 +32,19 @@ static void constructor_test()
 	cout << "*********** constructor ***********\n" << endl;
 
 	cout << "[ default constructor ]" << endl;
-	PRE::vector<Number> v1;
+	PRE::vector<Fixed> v1;
 	test_put(v1);
 
 	cout << "\n[ argument constructor ]" << endl;
-	PRE::vector<Number> v2(3, Number(42));
+	PRE::vector<Fixed> v2(3, Fixed(42));
 	test_put(v2);
 
 	cout << "\n[ iterator constructor ]" << endl;
-	PRE::vector<Number> v3(v2.begin(), v2.end());
+	PRE::vector<Fixed> v3(v2.begin(), v2.end());
 	test_put(v3);
 
 	cout << "\n[ copy constructor ]" << endl;
-	PRE::vector<Number> v4(v2);
+	PRE::vector<Fixed> v4(v2);
 	test_put(v4);
 
 	cout << "\n***********************************\n" << endl;
@@ -53,8 +53,8 @@ static void constructor_test()
 static void copy_operator_test()
 {
 	cout << "********** copy operator **********\n" << endl;
-	PRE::vector<Number> v1(3, Number(42));
-	PRE::vector<Number> v2;
+	PRE::vector<Fixed> v1(3, Fixed(42));
+	PRE::vector<Fixed> v2;
 
 	v2 = v1;
 	test_put(v2);
@@ -65,7 +65,7 @@ static void copy_operator_test()
 static void access_operator_test()
 {
 	cout << "********* access operator *********\n" << endl;
-	PRE::vector<Number> v(5, Number(42));
+	PRE::vector<Fixed> v(5, Fixed(42));
 
 	test_put(v);
 
@@ -75,16 +75,16 @@ static void access_operator_test()
 static void iterator_test()
 {
 	cout << "************ iterator ************\n" << endl;
-	PRE::vector<Number> v;
-	v.push_back(Number(1));
-	v.push_back(Number(2));
-	v.push_back(Number(3));
-	v.push_back(Number(4));
-	v.push_back(Number(5));
+	PRE::vector<Fixed> v;
+	v.push_back(Fixed(1));
+	v.push_back(Fixed(2));
+	v.push_back(Fixed(3));
+	v.push_back(Fixed(4));
+	v.push_back(Fixed(5));
 	test_put(v);
 
-	PRE::vector<Number>::iterator it = v.begin();
-	PRE::vector<Number>::iterator it_end = v.end();
+	PRE::vector<Fixed>::iterator it = v.begin();
+	PRE::vector<Fixed>::iterator it_end = v.end();
 
 	cout << "iterator output" << endl;
 	for (; it != it_end; ++it)
@@ -97,18 +97,18 @@ static void iterator_test()
 static void const_iterator_test()
 {
 	cout << "************ const_iterator ************\n" << endl;
-	PRE::vector<Number> v;
-	v.push_back(Number(1));
-	v.push_back(Number(2));
-	v.push_back(Number(3));
-	v.push_back(Number(4));
-	v.push_back(Number(5));
+	PRE::vector<Fixed> v;
+	v.push_back(Fixed(1));
+	v.push_back(Fixed(2));
+	v.push_back(Fixed(3));
+	v.push_back(Fixed(4));
+	v.push_back(Fixed(5));
 
-	const PRE::vector<Number> &cv = v;
+	const PRE::vector<Fixed> &cv = v;
 	test_put(cv);
 
-	PRE::vector<Number>::const_iterator it = cv.begin();
-	PRE::vector<Number>::const_iterator it_end = cv.end();
+	PRE::vector<Fixed>::const_iterator it = cv.begin();
+	PRE::vector<Fixed>::const_iterator it_end = cv.end();
 
 	cout << "const iterator output" << endl;
 	for (; it != it_end; ++it)
@@ -121,16 +121,16 @@ static void const_iterator_test()
 static void reverse_iterator_test()
 {
 	cout << "************ reverse_iterator ************\n" << endl;
-	PRE::vector<Number> v;
-	v.push_back(Number(1));
-	v.push_back(Number(2));
-	v.push_back(Number(3));
-	v.push_back(Number(4));
-	v.push_back(Number(5));
+	PRE::vector<Fixed> v;
+	v.push_back(Fixed(1));
+	v.push_back(Fixed(2));
+	v.push_back(Fixed(3));
+	v.push_back(Fixed(4));
+	v.push_back(Fixed(5));
 	test_put(v);
 
-	PRE::vector<Number>::reverse_iterator it = v.rbegin();
-	PRE::vector<Number>::reverse_iterator it_end = v.rend();
+	PRE::vector<Fixed>::reverse_iterator it = v.rbegin();
+	PRE::vector<Fixed>::reverse_iterator it_end = v.rend();
 
 	cout << "reverse iterator output" << endl;
 	for (; it != it_end; ++it)
@@ -143,18 +143,18 @@ static void reverse_iterator_test()
 static void const_reverse_iterator_test()
 {
 	cout << "************ const_reverse_iterator ************\n" << endl;
-	PRE::vector<Number> v;
-	v.push_back(Number(1));
-	v.push_back(Number(2));
-	v.push_back(Number(3));
-	v.push_back(Number(4));
-	v.push_back(Number(5));
+	PRE::vector<Fixed> v;
+	v.push_back(Fixed(1));
+	v.push_back(Fixed(2));
+	v.push_back(Fixed(3));
+	v.push_back(Fixed(4));
+	v.push_back(Fixed(5));
 
-	const PRE::vector<Number> &cv = v;
+	const PRE::vector<Fixed> &cv = v;
 	test_put(cv);
 
-	PRE::vector<Number>::const_reverse_iterator it = cv.rbegin();
-	PRE::vector<Number>::const_reverse_iterator it_end = cv.rend();
+	PRE::vector<Fixed>::const_reverse_iterator it = cv.rbegin();
+	PRE::vector<Fixed>::const_reverse_iterator it_end = cv.rend();
 
 	cout << "const reverse iterator output" << endl;
 	for (; it != it_end; ++it)
@@ -167,10 +167,10 @@ static void const_reverse_iterator_test()
 static void empty_test()
 {
 	cout << "************ empty ************\n" << endl;
-	PRE::vector<Number> v1;
+	PRE::vector<Fixed> v1;
 	test_put(v1);
 
-	PRE::vector<Number> v2(3, Number(42));
+	PRE::vector<Fixed> v2(3, Fixed(42));
 	test_put(v2);
 
 	cout << "\n***********************************\n" << endl;
@@ -179,10 +179,10 @@ static void empty_test()
 static void size_test()
 {
 	cout << "************ size ************\n" << endl;
-	PRE::vector<Number> v1;
+	PRE::vector<Fixed> v1;
 	test_put(v1);
 
-	PRE::vector<Number> v2(21, Number(42));
+	PRE::vector<Fixed> v2(21, Fixed(42));
 	test_put(v2);
 
 	cout << "\n***********************************\n" << endl;
@@ -191,7 +191,7 @@ static void size_test()
 static void max_size_test()
 {
 	cout << "************ max_size ************\n" << endl;
-	PRE::vector<Number> v;
+	PRE::vector<Fixed> v;
 	test_put(v);
 	cout << "max_size : " << v.max_size() << endl;
 
@@ -201,15 +201,15 @@ static void max_size_test()
 static void capacity_test()
 {
 	cout << "************ capacity ************\n" << endl;
-	PRE::vector<Number> v1;
+	PRE::vector<Fixed> v1;
 	test_put(v1);
 	cout << "capacity : " << v1.capacity() << endl;
 
-	PRE::vector<Number> v2(10, 42);
+	PRE::vector<Fixed> v2(10, 42);
 	test_put(v2);
 	cout << "capacity : " << v2.capacity() << endl;
 
-	PRE::vector<Number> v3(42, 10);
+	PRE::vector<Fixed> v3(42, 10);
 	v3.push_back(33);
 	v3.push_back(33);
 	v3.push_back(33);
@@ -225,15 +225,15 @@ static void capacity_test()
 static void reserve_test()
 {
 	cout << "************ reserve ************\n" << endl;
-	PRE::vector<Number> v1;
+	PRE::vector<Fixed> v1;
 	v1.reserve(10);
 	test_put(v1);
 
-	PRE::vector<Number> v2(10, 42);
+	PRE::vector<Fixed> v2(10, 42);
 	v2.reserve(3);
 	test_put(v2);
 
-	PRE::vector<Number> v3(42, 10);
+	PRE::vector<Fixed> v3(42, 10);
 	try
 	{
 		v3.resize(-1);
@@ -250,15 +250,15 @@ static void reserve_test()
 static void clear_test()
 {
 	cout << "************ clear ************\n" << endl;
-	PRE::vector<Number> v1;
+	PRE::vector<Fixed> v1;
 	v1.clear();
 	test_put(v1);
 
-	PRE::vector<Number> v2(10, 42);
+	PRE::vector<Fixed> v2(10, 42);
 	v2.clear();
 	test_put(v2);
 
-	PRE::vector<Number> v3(42, 10);
+	PRE::vector<Fixed> v3(42, 10);
 	v3.push_back(33);
 	v3.push_back(33);
 	v3.push_back(33);
@@ -274,25 +274,25 @@ static void clear_test()
 static void insert_test()
 {
 	cout << "************ insert ************\n" << endl;
-	PRE::vector<Number> v1;
-	PRE::vector<Number>::iterator it;
+	PRE::vector<Fixed> v1;
+	PRE::vector<Fixed>::iterator it;
 
-	it = v1.insert(v1.begin(), Number(1));
+	it = v1.insert(v1.begin(), Fixed(1));
 	test_put2(v1, it);
-	it = v1.insert(v1.begin() + 1, Number(2));
+	it = v1.insert(v1.begin() + 1, Fixed(2));
 	test_put2(v1, it);
-	it = v1.insert(v1.begin() + 2, Number(3));
+	it = v1.insert(v1.begin() + 2, Fixed(3));
 	test_put2(v1, it);
 
-	PRE::vector<Number> v2;
-	v2.insert(v2.begin(), 5, Number(42));
+	PRE::vector<Fixed> v2;
+	v2.insert(v2.begin(), 5, Fixed(42));
 	test_put(v2);
-	v2.insert(v2.begin() + 5, 5, Number(33));
+	v2.insert(v2.begin() + 5, 5, Fixed(33));
 	test_put(v2);
-	v2.insert(v2.begin(), 5, Number(11));
+	v2.insert(v2.begin(), 5, Fixed(11));
 	test_put(v2);
 
-	PRE::vector<Number> v3;
+	PRE::vector<Fixed> v3;
 	v3.insert(v3.begin(), v2.begin(), v2.end());
 	test_put(v3);
 	v3.insert(v3.begin() + 2, v2.begin() + 5 , v2.begin() + 7);
@@ -304,17 +304,17 @@ static void insert_test()
 static void erase_test()
 {
 	cout << "************ erase ************\n" << endl;
-	PRE::vector<Number> v1;
-	v1.push_back(Number(1));
-	v1.push_back(Number(2));
-	v1.push_back(Number(3));
-	v1.push_back(Number(4));
-	v1.push_back(Number(5));
-	v1.push_back(Number(6));
-	v1.push_back(Number(7));
+	PRE::vector<Fixed> v1;
+	v1.push_back(Fixed(1));
+	v1.push_back(Fixed(2));
+	v1.push_back(Fixed(3));
+	v1.push_back(Fixed(4));
+	v1.push_back(Fixed(5));
+	v1.push_back(Fixed(6));
+	v1.push_back(Fixed(7));
 	test_put(v1);
 
-	PRE::vector<Number>::iterator it;
+	PRE::vector<Fixed>::iterator it;
 
 	it = v1.erase(v1.end() - 1);
 	test_put2(v1, it);
@@ -331,14 +331,14 @@ static void erase_test()
 static void push_back_test()
 {
 	cout << "************ push_back ************\n" << endl;
-	PRE::vector<Number> v1;
-	v1.push_back(Number(1));
-	v1.push_back(Number(2));
-	v1.push_back(Number(3));
-	v1.push_back(Number(4));
-	v1.push_back(Number(5));
-	v1.push_back(Number(6));
-	v1.push_back(Number(7));
+	PRE::vector<Fixed> v1;
+	v1.push_back(Fixed(1));
+	v1.push_back(Fixed(2));
+	v1.push_back(Fixed(3));
+	v1.push_back(Fixed(4));
+	v1.push_back(Fixed(5));
+	v1.push_back(Fixed(6));
+	v1.push_back(Fixed(7));
 	test_put(v1);
 
 	cout << "\n***********************************\n" << endl;
@@ -347,7 +347,7 @@ static void push_back_test()
 static void pop_back_test()
 {
 	cout << "************ pop_back ************\n" << endl;
-	PRE::vector<Number> v(10, 3);
+	PRE::vector<Fixed> v(10, 3);
 	test_put(v);
 
 	v.pop_back();
@@ -361,7 +361,7 @@ static void pop_back_test()
 static void resize_test()
 {
 	cout << "************ resize ************\n" << endl;
-	PRE::vector<Number> v(5, 42);
+	PRE::vector<Fixed> v(5, 42);
 	test_put(v);
 
 	v.resize(10, 33);
@@ -387,8 +387,8 @@ static void resize_test()
 static void swap_test()
 {
 	cout << "************ swap ************\n" << endl;
-	PRE::vector<Number> v1(5, 42);
-	PRE::vector<Number> v2(7, 33);
+	PRE::vector<Fixed> v1(5, 42);
+	PRE::vector<Fixed> v2(7, 33);
 	cout << "v1 capacity : " << v1.capacity() << endl;
 	test_put(v1);
 	cout << "v2 capacity : " << v2.capacity() << endl;
@@ -406,9 +406,9 @@ static void swap_test()
 static void comparison_operator_test()
 {
 	cout << "************ comparison operator ************\n" << endl;
-	PRE::vector<Number> v1(10, 5);
-	PRE::vector<Number> v2(10, 5);
-	PRE::vector<Number> v3(42, 5);
+	PRE::vector<Fixed> v1(10, 5);
+	PRE::vector<Fixed> v2(10, 5);
+	PRE::vector<Fixed> v3(42, 5);
 
 	test_put(v1);
 	test_put(v2);
@@ -449,8 +449,8 @@ static void comparison_operator_test()
 static void non_member_swap_test()
 {
 	cout << "************ non-member swap ************\n" << endl;
-	PRE::vector<Number> v1(5, 42);
-	PRE::vector<Number> v2(7, 33);
+	PRE::vector<Fixed> v1(5, 42);
+	PRE::vector<Fixed> v2(7, 33);
 	cout << "v1 capacity : " << v1.capacity() << endl;
 	test_put(v1);
 	cout << "v2 capacity : " << v2.capacity() << endl;
@@ -468,7 +468,7 @@ static void non_member_swap_test()
 static void assign_test()
 {
 	cout << "************ assign ************\n" << endl;
-	PRE::vector<Number> v;
+	PRE::vector<Fixed> v;
 
 	v.assign(3, 42);
 	test_put(v);
@@ -512,9 +512,9 @@ static void get_allocator_test()
 {
 	cout << "************ get_allocator ************\n" << endl;
 
-	PRE::vector<Number> v;
+	PRE::vector<Fixed> v;
 
-	if (v.get_allocator() == std::allocator<Number>())
+	if (v.get_allocator() == std::allocator<Fixed>())
 		cout << "OK" << endl;
 	else
 		cout << "NG" << endl;
@@ -526,9 +526,9 @@ static void at_test()
 {
 	cout << "************ at ************\n" << endl;
 
-	PRE::vector<Number> v;
+	PRE::vector<Fixed> v;
 	for (int i = 0; i < 5; i++)
-		v.push_back(Number(i));
+		v.push_back(Fixed(i));
 
 	for (int i = 0; i < 5; i++)
 		cout << v.at(i) << " ";
@@ -550,8 +550,8 @@ static void front_test()
 {
 	cout << "************ front ************\n" << endl;
 
-	PRE::vector<Number> v(3, 42);
-	const PRE::vector<Number> &cv = v;
+	PRE::vector<Fixed> v(3, 42);
+	const PRE::vector<Fixed> &cv = v;
 
 	cout << v.front() << endl;
 	cout << cv.front() << endl;
@@ -563,8 +563,8 @@ static void back_test()
 {
 	cout << "************ back ************\n" << endl;
 
-	PRE::vector<Number> v(3, 42);
-	const PRE::vector<Number> &cv = v;
+	PRE::vector<Fixed> v(3, 42);
+	const PRE::vector<Fixed> &cv = v;
 
 	cout << v.back() << endl;
 	cout << cv.back() << endl;
@@ -576,8 +576,8 @@ static void data_test()
 {
 	cout << "************ data ************\n" << endl;
 
-	PRE::vector<Number> v(3, 42);
-	const PRE::vector<Number> &cv = v;
+	PRE::vector<Fixed> v(3, 42);
+	const PRE::vector<Fixed> &cv = v;
 
 	cout << *(v.data()) << endl;
 	cout << *(cv.data()) << endl;
