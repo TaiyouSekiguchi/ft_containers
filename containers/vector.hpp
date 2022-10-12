@@ -3,6 +3,8 @@
 
 # include <memory>
 # include <limits>
+# include <algorithm>
+# include <iterator>
 
 # include "../utils/algorithm.hpp"
 # include "../utils/iterator.hpp"
@@ -294,7 +296,8 @@ class vector
 					typename ft::enable_if<!ft::is_integral<InputIt>::value,
 											InputIt>::type * = NULL)
 		{
-			size_type count = src_last - src_first;
+			size_type count = std::distance(src_first, src_last);
+			//size_type count = src_last - src_first;
 			if (count > capacity())
 			{
 				clear();
@@ -319,9 +322,19 @@ class vector
 			}
 			else
 			{
+				pointer new_last = first_ + count;
+				std::copy(src_first, src_last, first_);
+				for (;new_last != last_; ++new_last)
+				{
+					destroy(new_last);
+				}
+				last_ = new_last;
+
+				/*
 				clear();
 				for (InputIt head = src_first; head != src_last; ++head)
 					construct(last_++, *head);
+				*/
 			}
 		}
 		iterator insert(iterator pos, const T &value)
