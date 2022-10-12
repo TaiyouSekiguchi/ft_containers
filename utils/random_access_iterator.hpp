@@ -8,15 +8,15 @@ namespace ft
 
 template <typename T>
 class random_access_iterator
-	: public ft::iterator<ft::random_access_iterator_tag, T>
+	: public ft::iterator<std::random_access_iterator_tag, T>
 {
 	protected:
 		T* _current;
 
 	public:
-		typedef typename ft::iterator<ft::random_access_iterator_tag, T>::iterator_category		iterator_category;
-		typedef typename ft::iterator<ft::random_access_iterator_tag, T>::value_type			value_type;
-		typedef typename ft::iterator<ft::random_access_iterator_tag, T>::difference_type		difference_type;
+		typedef typename ft::iterator<std::random_access_iterator_tag, T>::iterator_category		iterator_category;
+		typedef typename ft::iterator<std::random_access_iterator_tag, T>::value_type			value_type;
+		typedef typename ft::iterator<std::random_access_iterator_tag, T>::difference_type		difference_type;
 		typedef T*																				pointer;
 		typedef T&																				reference;
 
