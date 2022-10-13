@@ -18,6 +18,6 @@
 #include <map>
 #endif
 
-#define SIZE 1000
+#define SIZE 10000
 
 #endif // BENCHMARK_TEST_HPP

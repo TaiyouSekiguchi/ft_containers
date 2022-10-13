@@ -487,7 +487,12 @@ static void assign_test()
 	}
 	test_put(v);
 
-	const std::array<int, 4> data = {4, 3, 2, 1};
+	// const std::array<int, 4> data = {4, 3, 2, 1};
+	PRE::vector<Number> data;
+	data.push_back(Number(4));
+	data.push_back(Number(3));
+	data.push_back(Number(2));
+	data.push_back(Number(1));
 
 	v.assign(data.begin(), data.begin() + 1);
 	test_put(v);

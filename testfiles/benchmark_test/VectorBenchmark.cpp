@@ -44,9 +44,9 @@ void VectorBenchmark::VectorBenchmarking()
 	Benchmarking("VectorReserve", &VectorBenchmark::VectorReserve);
 	Benchmarking("VectorCapacity", &VectorBenchmark::VectorCapacity);
 	Benchmarking("VectorClear", &VectorBenchmark::VectorClear);
-	Benchmarking("VectorInsert", &VectorBenchmark::VectorInsert);
-	Benchmarking("VectorInserts", &VectorBenchmark::VectorInserts);
-	Benchmarking("VectorInsertIterator", &VectorBenchmark::VectorInsertIterator);
+	//Benchmarking("VectorInsert", &VectorBenchmark::VectorInsert);
+	//Benchmarking("VectorInserts", &VectorBenchmark::VectorInserts);
+	//Benchmarking("VectorInsertIterator", &VectorBenchmark::VectorInsertIterator);
 	Benchmarking("VectorErase", &VectorBenchmark::VectorErase);
 	Benchmarking("VectorEraseIterator", &VectorBenchmark::VectorEraseIterator);
 	Benchmarking("VectorPushBack", &VectorBenchmark::VectorPushBack);

@@ -305,8 +305,9 @@ class vector
 					typename ft::enable_if<!ft::is_integral<InputIt>::value,
 											InputIt>::type * = NULL)
 		{
-			size_type count = std::distance(src_first, src_last);
-			//size_type count = src_last - src_first;
+			//size_type count = std::distance(src_first, src_last);
+			size_type count = src_last.base() - src_first.base();
+			size_type s = size();
 			if (count > capacity())
 			{
 				clear();
@@ -315,32 +316,84 @@ class vector
 				first_ = allocate(count);
 				last_ = first_;
 				reserved_last_ = first_ + count;
+
+				for (pointer head = src_first.base(), tail = src_last.base(); head != tail; ++head)
+					construct(last_++, *head);
+
+				/*
 				for (InputIt head = src_first; head != src_last; ++head)
 					construct(last_++, *head);
+				*/
 			}
-			else if (count > size())
+			else if (count > s)
 			{
 				pointer ptr = first_;
+				pointer ptr2 = src_first.base();
+
 				for (size_type i = 0; i < count; ++i)
 				{
-					if (i < size())
-						*(ptr++) = *src_first++;
+					if (i < s)
+						*(ptr++) = *(ptr2++);
 					else
-						construct(last_++, *src_first++);
+						construct(last_++, *(ptr2++));
 				}
 			}
 			else
 			{
 				pointer new_last = first_ + count;
-				std::copy(src_first, src_last, first_);
-				pointer ptr = new_last;
-				for (; ptr != last_; ++ptr)
+				//std::copy(src_first, src_last, first_);
+
+				pointer head = src_first.base();
+				pointer tail = src_last.base();
+				pointer ptr1 = first_;
+				for (; head != tail; ++head)
 				{
-					destroy(ptr);
+					*ptr1 = *head;
+				}
+
+				pointer ptr2 = new_last;
+				for (; ptr2 != last_; ++ptr2)
+				{
+					destroy(ptr2);
 				}
 				last_ = new_last;
 			}
 		}
+
+		iterator insert(iterator pos, const T &value)
+		{
+			size_type insert_size = 1;
+			size_type new_size = size() + insert_size;
+			size_type diff = pos.base() - first_;
+
+			reserve(new_size);
+			construct(last_);
+
+			if (size() == 0)
+			{
+				*first_ = value;
+				last_++;
+				return (first_);
+			}
+			else if (diff == size())
+			{
+				*last_ = value;
+				return (last_++);
+			}
+			else
+			{
+				pointer ptr = last_ - 1;
+				for (; ptr != first_ + diff - 1; --ptr)
+				{
+					*(ptr + 1) = *ptr;
+				}
+				*(ptr++) = value;
+				last_++;
+				return (ptr);
+			}
+		}
+
+		/*
 		iterator insert(iterator pos, const T &value)
 		{
 			size_type count = 1;
@@ -376,6 +429,7 @@ class vector
 
 			return begin() + offset;
 		}
+		*/
 
 		void insert(iterator pos, size_type count, const T &value)
 		{
@@ -534,7 +588,7 @@ class vector
 			reserved_last_ = NULL;
 		}
 
-		void construct(pointer ptr) { alloc_.construct(ptr); }
+		void construct(pointer ptr) { alloc_.construct(ptr, value_type()); }
 		void construct(pointer ptr, const_reference value) { alloc_.construct(ptr, value); }
 		void destroy(pointer ptr) { alloc_.destroy(ptr); }
 

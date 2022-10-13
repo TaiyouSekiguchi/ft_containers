@@ -44,7 +44,7 @@ test0			:
 
 test1			:
 					$(CXX) $(CXXFLAGS) $(SRCS) -o $(NAME)
-					@./$(NAME) > output/std_out.txt 2>output/std_err.txt
+					@./$(NAME) > output/std_output.txt 2>output/std_err.txt
 					@cat output/std_output.txt
 					@cat output/std_err.txt
 
