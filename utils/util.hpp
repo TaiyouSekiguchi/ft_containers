@@ -15,17 +15,11 @@ struct integral_constant
 	const value_type operator()() const { return value; }
 };
 
-/// The type used as a compile-time boolean with true value.
 typedef integral_constant<bool, true> true_type;
 
-/// The type used as a compile-time boolean with false value.
 typedef integral_constant<bool, false> false_type;
 
 /// is_same
-/*
-通常はfalse_typeを継承
-型が同じ場合だけtrueになる
-*/
 template <typename, typename>
 struct is_same : public false_type
 {
