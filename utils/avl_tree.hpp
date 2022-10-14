@@ -13,32 +13,34 @@ class avl_tree
 {
 
 	public:
-		typedef Key key_type;
-		typedef Val value_type;
-		typedef Compare map_value_compare;
-		typedef Alloc allocator_type;
-		typedef std::size_t size_type;
-		typedef std::ptrdiff_t difference_type;
+		typedef Key 				key_type;
+		typedef Val 				value_type;
+		typedef Compare 			map_value_compare;
+		typedef Alloc 				allocator_type;
+		typedef std::size_t 		size_type;
+		typedef std::ptrdiff_t		difference_type;
 
 	private:
 		typedef avl_tree_node<Val> node_type;
 
 	public:
-		typedef node_type *node_pointer;
-		typedef typename Alloc::template rebind<node_type>::other node_allocator_type;
-		typedef avl_tree_iterator<value_type, node_type> iterator;
-		typedef avl_tree_iterator<const value_type, const node_type> const_iterator;
+		typedef node_type*												node_pointer;
+		typedef typename Alloc::template rebind<node_type>::other		node_allocator_type;
+		typedef avl_tree_iterator<value_type, node_type> 				iterator;
+		typedef avl_tree_iterator<const value_type, const node_type>	const_iterator;
 
 	private:
-		map_value_compare	comp_;
-		node_allocator_type	node_alloc_;
-		size_type			size_;
-		node_pointer		begin_;
-		node_pointer		end_;
+		map_value_compare		comp_;
+		node_allocator_type		node_alloc_;
+		size_type				size_;
+		node_pointer			begin_;
+		node_pointer			end_;
 
 	public:
 		avl_tree(map_value_compare comp, allocator_type alloc)
-			: comp_(comp), node_alloc_(alloc), size_(0)
+			: comp_(comp)
+			, node_alloc_(alloc)
+			, size_(0)
 		{
 			end_ = create_node();
 			end_->left_ = NULL;
@@ -46,7 +48,9 @@ class avl_tree
 		}
 
 		avl_tree(const avl_tree& o)
-			: comp_(o.comp_), node_alloc_(o.node_alloc_), size_(0)
+			: comp_(o.comp_)
+			, node_alloc_(o.node_alloc_)
+			, size_(0)
 		{
 			end_ = create_node();
 			end_->left_ = NULL;
@@ -72,17 +76,12 @@ class avl_tree
 			return *this;
 		}
 
-		iterator begin() { return (iterator(begin_)); }
-		const_iterator begin() const { return (const_iterator(begin_)); }
-		iterator end() { return (iterator(end_)); }
-		const_iterator end() const { return (const_iterator(end_)); }
-
-
-
-
-
-		size_type size() const { return (size_); }
-		size_type max_size() const { return (std::min<size_type>(node_alloc_.max_size(), std::numeric_limits<difference_type>::max())); }
+		iterator 		begin()				{ return (iterator(begin_)); }
+		const_iterator 	begin() const		{ return (const_iterator(begin_)); }
+		iterator 		end()				{ return (iterator(end_)); }
+		const_iterator 	end() const			{ return (const_iterator(end_)); }
+		size_type 		size() const 		{ return (size_); }
+		size_type 		max_size() const	{ return (std::min<size_type>(node_alloc_.max_size(), std::numeric_limits<difference_type>::max())); }
 
 	private:
 		node_pointer create_node_at(const value_type & val, node_pointer parent_node)

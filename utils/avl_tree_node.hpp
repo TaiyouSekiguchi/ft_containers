@@ -10,24 +10,42 @@ template <typename Val>
 class avl_tree_node
 {
 	public:
-		typedef avl_tree_node* node_pointer;
-		typedef const avl_tree_node* const_node_pointer;
-		typedef Val value_type;
-		typedef std::size_t size_type;
-		typedef std::ptrdiff_t difference_type;
+		typedef avl_tree_node* 				node_pointer;
+		typedef const avl_tree_node* 		const_node_pointer;
+		typedef Val 						value_type;
+		typedef std::size_t 				size_type;
+		typedef std::ptrdiff_t 				difference_type;
 
-		node_pointer parent_;
-		node_pointer left_;
-		node_pointer right_;
-		value_type value_;
-		size_type height_;
+		node_pointer 	parent_;
+		node_pointer 	left_;
+		node_pointer 	right_;
+		value_type		value_;
+		size_type 		height_;
 
 		avl_tree_node()
-			: parent_(NULL), left_(NULL), right_(NULL) {}
+			: parent_(NULL)
+			, left_(NULL)
+			, right_(NULL)
+		{
+		}
+
 		explicit avl_tree_node(const value_type& val)
-			: parent_(NULL), left_(NULL), right_(NULL), value_(val), height_(1) {}
+			: parent_(NULL)
+			, left_(NULL)
+			, right_(NULL)
+			, value_(val)
+			, height_(1)
+		{
+		}
+
 		avl_tree_node(const avl_tree_node& o)
-			: parent_(o.parent_), left_(o.left_), right_(o.right_), value_(o.value_), height_(o.height_) {}
+			: parent_(o.parent_)
+			, left_(o.left_)
+			, right_(o.right_)
+			, value_(o.value_)
+			, height_(o.height_)
+		{
+		}
 
 		difference_type balance() const
 		{
@@ -43,8 +61,8 @@ class avl_tree_node
 			height_ = 1 + std::max(left_height, right_height);
 		}
 
-		bool is_left() const { return (this == parent_->left_); }
-		bool is_right() const { return (this == parent_->right_); }
+		bool is_left()	const { return (this == parent_->left_); }
+		bool is_right()	const { return (this == parent_->right_); }
 
 		void connect_left(node_pointer new_left_node)
 		{

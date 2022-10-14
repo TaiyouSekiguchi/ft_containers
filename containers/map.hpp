@@ -7,7 +7,6 @@
 #include "../utils/avl_tree.hpp"
 #include "../utils/algorithm.hpp"
 
-
 namespace ft
 {
 
@@ -169,10 +168,6 @@ class map
 		{
 			tree_.insert(first, last);
 		}
-
-
-
-
 
 		void erase(iterator pos)
 		{
