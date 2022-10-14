@@ -487,14 +487,19 @@ static void assign_test()
 	}
 	test_put(v);
 
-	// const std::array<int, 4> data = {4, 3, 2, 1};
-	PRE::vector<Number> data;
+	//std::array<Number, 4> data = {Number(4), Number(3), Number(2), Number(2)};
+	//PRE::vector<Number> data;
+	std::list<Number> data;
+	data.push_back(Number(5));
 	data.push_back(Number(4));
 	data.push_back(Number(3));
 	data.push_back(Number(2));
 	data.push_back(Number(1));
 
-	v.assign(data.begin(), data.begin() + 1);
+	v.assign(data.begin(), data.end());
+	v.assign(data.begin(), data.end());
+	v.assign(data.begin(), data.end());
+	/*
 	test_put(v);
 	v.assign(data.begin(), data.begin() + 2);
 	test_put(v);
@@ -508,6 +513,7 @@ static void assign_test()
 	{
 		cout << "catch length_error" << endl;
 	}
+	*/
 	test_put(v);
 
 	cout << "\n***********************************\n" << endl;

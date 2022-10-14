@@ -2,6 +2,8 @@
 #define VECTORBENCHMARK_HPP
 
 #include "benchmark_test.hpp"
+#include <vector>
+
 
 class VectorBenchmark
 {
@@ -59,6 +61,7 @@ class VectorBenchmark
 		PRE::vector<int> v2_;
 		const PRE::vector<int>& cv_;
 		const PRE::vector<int>& cv2_;
+		std::vector<int> assign_src_v_;
 		PRE::vector<int> assign_v_;
 		PRE::vector<int> reserve_v_;
 		PRE::vector<int> insert_v_;

@@ -20,6 +20,7 @@
 #endif
 
 #include <array>
+#include <list>
 
 #include <stdlib.h>
 #include <time.h> // clock()

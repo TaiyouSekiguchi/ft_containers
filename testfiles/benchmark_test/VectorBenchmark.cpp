@@ -6,7 +6,10 @@ VectorBenchmark::VectorBenchmark()
 	: cv_(v_), cv2_(v2_)
 {
 	for (int i = 0; i < SIZE; i++)
+	{
 		v_.push_back(42);
+		assign_src_v_.push_back(42);
+	}
 	for (int i = 0; i < SIZE * 2; i++)
 		v2_.push_back(42);
 	insert_v_ = v_;
@@ -44,9 +47,9 @@ void VectorBenchmark::VectorBenchmarking()
 	Benchmarking("VectorReserve", &VectorBenchmark::VectorReserve);
 	Benchmarking("VectorCapacity", &VectorBenchmark::VectorCapacity);
 	Benchmarking("VectorClear", &VectorBenchmark::VectorClear);
-	//Benchmarking("VectorInsert", &VectorBenchmark::VectorInsert);
-	//Benchmarking("VectorInserts", &VectorBenchmark::VectorInserts);
-	//Benchmarking("VectorInsertIterator", &VectorBenchmark::VectorInsertIterator);
+	Benchmarking("VectorInsert", &VectorBenchmark::VectorInsert);
+	Benchmarking("VectorInserts", &VectorBenchmark::VectorInserts);
+	Benchmarking("VectorInsertIterator", &VectorBenchmark::VectorInsertIterator);
 	Benchmarking("VectorErase", &VectorBenchmark::VectorErase);
 	Benchmarking("VectorEraseIterator", &VectorBenchmark::VectorEraseIterator);
 	Benchmarking("VectorPushBack", &VectorBenchmark::VectorPushBack);
@@ -97,7 +100,7 @@ void VectorBenchmark::VectorIteratorConstructor()			{ PRE::vector<int> v(v_.begi
 void VectorBenchmark::VectorCopyConstructor()				{ PRE::vector<int> v(v_); }
 void VectorBenchmark::VectorCopyOperator()					{ PRE::vector<int> v; v = cv_; }
 void VectorBenchmark::VectorAssign()						{ assign_v_.assign(SIZE, 42); }
-void VectorBenchmark::VectorAssignIterator()				{ assign_v_.assign(v_.begin(), v_.end()); }
+void VectorBenchmark::VectorAssignIterator()				{ assign_v_.assign(assign_src_v_.begin(), assign_src_v_.end()); }
 void VectorBenchmark::VectorGetAllocator()					{ v_.get_allocator(); }
 void VectorBenchmark::VectorAt()							{ v_.at(RandomNumber()); }
 void VectorBenchmark::VectorAccessOperator()				{ v_[RandomNumber()]; }
