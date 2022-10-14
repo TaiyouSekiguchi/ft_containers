@@ -5,6 +5,7 @@ tags.
 .tags
 *.a
 *.o
+*.d
 ft_benchmark.txt
 std_benchmark.txt
 ft_output.txt
@@ -15,3 +16,5 @@ ft_test
 std_test
 ft_output_test
 std_output_test
+ft_benchmark_test
+std_benchmark_test
