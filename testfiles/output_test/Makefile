@@ -1,34 +1,49 @@
-NAME			=	a.out
-SRCS			=	main.cpp \
+FT				=	ft_output_test
+FT_SRCS			=	main.cpp \
 					Number.cpp \
 					vector_test.cpp \
 					stack_test.cpp \
 					map_test.cpp
-OBJS_DIR		=	./objs
-OBJS			=	$(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.o))
+FT_OBJS_DIR		=	./ft_objs
+FT_OBJS			=	$(addprefix $(FT_OBJS_DIR)/, $(FT_SRCS:.cpp=.o))
+
+STD				=	std_output_test
+STD_SRCS		=	main.cpp \
+					Number.cpp \
+					vector_test.cpp \
+					stack_test.cpp \
+					map_test.cpp
+STD_OBJS_DIR	=	./std_objs
+STD_OBJS		=	$(addprefix $(STD_OBJS_DIR)/, $(STD_SRCS:.cpp=.o))
 
 #CXX				=	c++
 CXX				=	clang++
 CXXFLAGS		=	-Wall -Wextra -Werror -std=c++98
 CXXFLAGS		+=	-g -fsanitize=address
+
 RM				=	rm -f
 
 .PHONY			:	all clean fclean re
 
-all				:	$(NAME)
+all				:	$(FT) $(STD)
 
-$(NAME)			:	$(OBJS)
-					$(CXX) $(OBJS) $(CXXFLAGS) -o $@
+$(FT)			:	$(FT_OBJS)
+					$(CXX) $(FT_OBJS) $(CXXFLAGS) -o $@
 
-$(OBJS_DIR)/%.o	:	%.cpp
-					@[ -d $(OBJS_DIR) ]
-					$(CXX) $(CXXFLAGS) -c $< -o $@
+$(FT_OBJS)		:	$(FT_OBJS_DIR)/%.o	:	%.cpp
+					@[ -d $(FT_OBJS_DIR) ]
+					$(CXX) $(CXXFLAGS) $(INCLUDE) -D FT=1 -c $< -o $@
 
-test			:
-					$(CXX) $(CXXFLAGS) $(SRCS) -D FT=1 -o $(NAME)
-					@./$(NAME) > output/ft_output.txt 2>output/ft_err.txt
-					$(CXX) $(CXXFLAGS) $(SRCS) -o $(NAME)
-					@./$(NAME) > output/std_output.txt 2>output/std_err.txt
+$(STD)			:	$(STD_OBJS)
+					$(CXX) $(STD_OBJS) $(CXXFLAGS) -o $@
+
+$(STD_OBJS)		:	$(STD_OBJS_DIR)/%.o	:	%.cpp
+					@[ -d $(STD_OBJS_DIR) ]
+					$(CXX) $(CXXFLAGS) $(INCLUDE) -c $< -o $@
+
+test			:	$(FT) $(STD)
+					@./$(FT) > output/ft_output.txt 2>output/ft_err.txt
+					@./$(STD) > output/std_output.txt 2>output/std_err.txt
  # ret(1) cause make error.  ||: force ret(0)
 					diff output/ft_output.txt output/std_output.txt ||:
 					@echo "---ft_err.txt---"
@@ -36,24 +51,22 @@ test			:
 					@echo "---std_err.txt---"
 					@cat output/std_err.txt
 
-test0			:
-					$(CXX) $(CXXFLAGS) $(SRCS) -D FT=1 -o $(NAME)
-					@./$(NAME) > output/ft_output.txt 2>output/ft_err.txt
+ft_test			:	$(FT)
+					@./$(FT) > output/ft_output.txt 2>output/ft_err.txt
 					@cat output/ft_output.txt
 					@cat output/ft_err.txt
 
-test1			:
-					$(CXX) $(CXXFLAGS) $(SRCS) -o $(NAME)
-					@./$(NAME) > output/std_output.txt 2>output/std_err.txt
+std_test			:	$(STD)
+					@./$(STD) > output/std_output.txt 2>output/std_err.txt
 					@cat output/std_output.txt
 					@cat output/std_err.txt
 
 clean			:
-					$(RM) $(OBJS)
+					$(RM) $(FT_OBJS) $(STD_OBJS)
 					$(RM) output/ft_output.txt output/std_output.txt output/ft_err.txt output/std_err.txt
 
 fclean			:
-					$(RM) $(OBJS) $(NAME)
+					$(RM) $(FT_OBJS) $(STD_OBJS) $(FT) $(STD)
 					$(RM) output/ft_output.txt output/std_output.txt output/ft_err.txt output/std_err.txt
 
 re				:	fclean all
