@@ -4,8 +4,6 @@
 namespace ft
 {
 
-/// integral_constant
-
 template <typename _Tp, _Tp __v>
 struct integral_constant
 {
@@ -19,7 +17,6 @@ typedef integral_constant<bool, true> true_type;
 
 typedef integral_constant<bool, false> false_type;
 
-/// is_same
 template <typename, typename>
 struct is_same : public false_type
 {
@@ -30,7 +27,6 @@ struct is_same<_Tp, _Tp> : public true_type
 {
 };
 
-/// remove_const
 template <typename T>
 struct remove_const
 {
@@ -42,8 +38,6 @@ struct remove_const<T const>
 {
 	typedef T type;
 };
-
-/// remove_volatile
 template <typename T>
 struct remove_volatile
 {
@@ -56,14 +50,11 @@ struct remove_volatile<T volatile>
 	typedef T type;
 };
 
-/// remove_cv
 template <typename T>
 struct remove_cv
 {
 	typedef typename remove_const<typename remove_volatile<T>::type>::type type;
 };
-
-/// helper
 
 template <typename>
 struct __is_integral_helper : public false_type
@@ -141,7 +132,6 @@ struct __is_integral_helper<unsigned long long> : public true_type
 {
 };
 
-//// is_integral
 template <typename T>
 struct is_integral
 	: public __is_integral_helper<typename remove_cv<T>::type>::type
