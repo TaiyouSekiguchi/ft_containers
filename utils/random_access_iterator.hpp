@@ -116,10 +116,6 @@ class random_access_iterator
 			return *this;
 		}
 
-		/*
-		** ex. ft::reverse_iterator<ft::vector<int>::const_iterator> it1 =
-		*a1.rbegin();
-		*/
 		operator random_access_iterator<const T>() const
 		{
 			return (random_access_iterator<const T>(_current));
