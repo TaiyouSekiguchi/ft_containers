@@ -7,12 +7,12 @@ int main(void)
 	srand((unsigned int)time(NULL));
 
 	VectorBenchmark		vbm;
-	StackBenchmark		sbm;
-	MapBenchmark		mbm;
+	//StackBenchmark		sbm;
+	//MapBenchmark		mbm;
 
 	vbm.VectorBenchmarking();
-	sbm.StackBenchmarking();
-	mbm.MapBenchmarking();
+	//sbm.StackBenchmarking();
+	//mbm.MapBenchmarking();
 
 	return (0);
 }

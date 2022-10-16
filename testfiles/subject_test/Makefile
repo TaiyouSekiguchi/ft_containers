@@ -10,11 +10,11 @@ STD_OBJS_DIR	=	./std_objs
 STD_OBJS		=	$(addprefix $(STD_OBJS_DIR)/, $(STD_SRCS:.cpp=.o))
 STD_DEPS		=	$(addprefix $(STD_OBJS_DIR)/, $(STD_SRCS:.cpp=.d))
 
-#CXX				=	c++
-CXX				=	clang++
+CXX				=	c++
+#CXX				=	clang++
 CXXFLAGS		=	-Wall -Wextra -Werror -std=c++98
 CXXFLAGS		+=	-MMD -MP
-CXXFLAGS		+=	-g -fsanitize=address
+#CXXFLAGS		+=	-g -fsanitize=address
 
 INCLUDE_DIR		=	../../containers
 INCLUDE			=	-I$(INCLUDE_DIR)

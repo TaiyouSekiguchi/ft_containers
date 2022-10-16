@@ -186,6 +186,24 @@ class vector
 			alloc_.deallocate(old_first, old_capacity);
 		}
 
+		void resize(size_type sz, value_type value = value_type())
+		{
+			if (sz < size())
+			{
+				destroy_until(first_ + sz);
+				last_ = first_ + sz;
+			}
+			else if (sz > size())
+			{
+				reserve(sz);
+				for (; last_ != reserved_last_; ++last_)
+				{
+					construct(last_, value);
+				}
+			}
+		}
+
+		/*
 		void resize(size_type sz)
 		{
 			if (sz < size())
@@ -219,6 +237,7 @@ class vector
 				}
 			}
 		}
+		*/
 
 		void push_back(const_reference value)
 		{
