@@ -203,42 +203,6 @@ class vector
 			}
 		}
 
-		/*
-		void resize(size_type sz)
-		{
-			if (sz < size())
-			{
-				destroy_until(first_ + sz);
-				last_ = first_ + sz;
-			}
-			else if (sz > size())
-			{
-				reserve(sz);
-				for (; last_ != reserved_last_; ++last_)
-				{
-					construct(last_);
-				}
-			}
-		}
-
-		void resize(size_type sz, const_reference value)
-		{
-			if (sz < size())
-			{
-				destroy_until(first_ + sz);
-				last_ = first_ + sz;
-			}
-			else if (sz > size())
-			{
-				reserve(sz);
-				for (; last_ != reserved_last_; ++last_)
-				{
-					construct(last_, value);
-				}
-			}
-		}
-		*/
-
 		void push_back(const_reference value)
 		{
 			if (size() + 1 > capacity())
