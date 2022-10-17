@@ -312,6 +312,8 @@ static void erase_test()
 	v1.push_back(Number(5));
 	v1.push_back(Number(6));
 	v1.push_back(Number(7));
+	v1.push_back(Number(8));
+	v1.push_back(Number(9));
 	test_put(v1);
 
 	PRE::vector<Number>::iterator it;
@@ -319,7 +321,10 @@ static void erase_test()
 	it = v1.erase(v1.end() - 1);
 	test_put2(v1, it);
 
-	it = v1.erase(v1.begin() + 2, v1.begin() + 5);
+	it = v1.erase(v1.end() - 2);
+	test_put2(v1, it);
+
+	it = v1.erase(v1.begin() + 2, v1.begin() + 4);
 	test_put2(v1, it);
 
 	it = v1.erase(v1.begin(), v1.end());

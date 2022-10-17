@@ -346,37 +346,9 @@ class vector
 
 		iterator insert(iterator pos, const T &value)
 		{
-			size_type count = 1;
-			size_type offset = pos.base() - first_;
-
-			size_type c = capacity();
-			size_type pre_c = c;
-			size_type new_size = size() + count;
-			while (new_size > c)
-			{
-				if (c == 0)
-					c = 1;
-				else
-					c = c << 1;
-				if ((c >> 1) != pre_c)
-					throw std::overflow_error("vector::insert");
-				pre_c = c;
-			}
-			reserve(c);
-			for (; last_ != first_ + new_size; ++last_)
-				construct(last_);
-
-			pointer tail = last_ - 1;
-			pointer range_end = first_ + offset + count - 1;
-
-			for (; tail > range_end; --tail)
-				*tail = *(tail - count);
-
-			pointer range_begin = first_ + offset - 1;
-			for (; tail > range_begin; --tail)
-				*tail = value;
-
-			return first_ + offset;
+			difference_type offset = std::distance(first_, pos.base());
+			insert(pos, 1, value);
+			return (iterator(first_ + offset));
 		}
 
 		void insert(iterator pos, size_type count, const T &value)
@@ -386,7 +358,7 @@ class vector
 			if (count == 0)
 				return;
 
-			size_type offset = pos.base() - first_;
+			difference_type offset = std::distance(first_, pos.base());
 			size_type c = capacity();
 			size_type pre_c = c;
 			size_type new_size = size() + count;
@@ -401,16 +373,14 @@ class vector
 				pre_c = c;
 			}
 			reserve(c);
-			for (; last_ != first_ + new_size; ++last_)
-				construct(last_);
+			pointer new_last = last_ + count;
+			for (pointer ptr = last_; ptr != new_last; ++ptr)
+				construct(ptr);
 
-			pointer tail = last_ - 1;
-			pointer range_end = first_ + offset + count - 1;
-			for (; tail > range_end; --tail)
-				*tail = *(tail - count);
-			pointer range_begin = first_ + offset - 1;
-			for (; tail > range_begin; --tail)
-				*tail = value;
+			pos = begin() + offset;
+			std::copy_backward(pos.base(), last_, new_last);
+			std::fill(pos.base(), pos.base() + count, value);
+			last_ = new_last;
 		}
 
 		template <class InputIt>
@@ -424,7 +394,7 @@ class vector
 			if (count == 0)
 				return;
 
-			size_type offset = pos.base() - first_;
+			difference_type offset = std::distance(first_, pos.base());
 			size_type c = capacity();
 			size_type pre_c = c;
 			size_type new_size = size() + count;
@@ -439,17 +409,15 @@ class vector
 				pre_c = c;
 			}
 			reserve(c);
-			for (; last_ != first_ + new_size; ++last_)
-				construct(last_);
 
-			pointer tail = last_ - 1;
-			pointer range_end = first_ + offset + count - 1;
-			for (; tail > range_end; --tail)
-				*tail = *(tail - count);
+			pointer new_last = last_ + count;
+			for (pointer ptr = last_; ptr != new_last; ++ptr)
+				construct(ptr);
 
-			--src_last;
-			for (; src_last > src_first - 1; --src_last)
-				*tail-- = *src_last;
+			pos = begin() + offset;
+			std::copy_backward(pos.base(), last_, new_last);
+			std::copy(src_first, src_last, pos.base());
+			last_ = new_last;
 		}
 
 		iterator erase(iterator pos)
@@ -458,13 +426,9 @@ class vector
 				return NULL;
 
 			difference_type offset = pos - begin();
-
-			for (pointer src = pos.base() + 1; src < last_; ++src)
-			{
-					*(src - 1) = *src;
-			}
-
+			std::copy(pos.base() + 1, last_, pos.base());
 			destroy(--last_);
+
 			return (begin() + offset);
 		}
 
